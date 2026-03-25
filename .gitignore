@@ -1,0 +1,6 @@
+md/
+v1.1.*/
+.claude/
+*.workspace
+*.zip
+*.tmp.*

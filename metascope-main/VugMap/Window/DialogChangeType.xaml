@@ -1,0 +1,31 @@
+﻿<Window x:Class="VugMap.Window.DialogChangeType"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Change Type" Icon="../Resources/Icon.gif" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Loaded="OnLoaded">
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="95"/>
+			<ColumnDefinition Width="15"/>
+			<ColumnDefinition Width="330"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Label Grid.ColumnSpan="4" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Change type of the track:</Label>
+		<Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Current type</Label>
+		<Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">New type</Label>
+		<Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<TextBox Name="m_tbCurrent" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" IsEnabled="False"></TextBox>
+		<TextBox Name="m_tbToSet" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330"></TextBox>
+		<StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+			<Button Name="m_btnOk" HorizontalAlignment="Left" VerticalAlignment="Center" Width="210" Click="OnOkClick" IsDefault="True" Margin="5,0,10,0">OK</Button>
+			<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="210" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+		</StackPanel>		
+	</Grid>
+</Window>

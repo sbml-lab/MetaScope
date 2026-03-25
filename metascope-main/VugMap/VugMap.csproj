@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <LangVersion>latest</LangVersion>
+    <ProjectGuid>{2F922BC1-86CA-4785-A4DE-F9C36DD81304}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VugMap</RootNamespace>
+    <AssemblyName>MetaScope</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>VugMap.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Utility\Command\CommandAdd.cs" />
+    <Compile Include="Utility\Command\CommandBase.cs" />
+    <Compile Include="Utility\Command\CommandDelete.cs" />
+    <Compile Include="Utility\Command\CommandEdit.cs" />
+    <Compile Include="Utility\Command\CommandReplace.cs" />
+    <Compile Include="Utility\Data\DataBookmark.cs" />
+    <Compile Include="Utility\Error\ErrorMessage.cs" />
+    <Compile Include="Utility\Error\ExceptionAssertion.cs" />
+    <Compile Include="Utility\Error\ExceptionInvalidArgument.cs" />
+    <Compile Include="Utility\Error\ExceptionInvalidFormat.cs" />
+    <Compile Include="Utility\Error\ExceptionVugmap.cs" />
+    <Compile Include="Utility\SvgExporter.cs" />
+    <Compile Include="Utility\ManagerBookmark.cs" />
+    <Compile Include="Utility\ManagerEdit.cs" />
+    <Compile Include="Utility\ManagerPen.cs" />
+    <Compile Include="Utility\Reader\ReaderBookmark.cs" />
+    <Compile Include="Utility\UtilityFile.cs" />
+    <Compile Include="Utility\UtilityMath.cs" />
+    <Compile Include="Utility\UtilityMessage.cs" />
+    <Compile Include="Utility\UtilityWindow.cs" />
+    <Compile Include="Window\ColorPicker\ColorDialog.xaml.cs">
+      <DependentUpon>ColorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\ColorPicker\ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\ComboBoxPopup.cs" />
+    <Compile Include="Window\DialogBookmarkAdd.xaml.cs">
+      <DependentUpon>DialogBookmarkAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogChangeType.xaml.cs">
+      <DependentUpon>DialogChangeType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogFeatureAdd.xaml.cs">
+      <DependentUpon>DialogFeatureAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogFeatureAddSize.xaml.cs">
+      <DependentUpon>DialogFeatureAddSize.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogFeatureEdit.xaml.cs">
+      <DependentUpon>DialogFeatureEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogFeatureOpacity.xaml.cs">
+      <DependentUpon>DialogFeatureOpacity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogFeatureOperation.xaml.cs">
+      <DependentUpon>DialogFeatureOperation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogFileOpen.xaml.cs">
+      <DependentUpon>DialogFileOpen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogIntegrationOperation.xaml.cs">
+      <DependentUpon>DialogIntegrationOperation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogLaneOperation.xaml.cs">
+      <DependentUpon>DialogLaneOperation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogPositionTo.xaml.cs">
+      <DependentUpon>DialogPositionTo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogSearch.xaml.cs">
+      <DependentUpon>DialogSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogSetScale.xaml.cs">
+      <DependentUpon>DialogSetScale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogShortcuts.xaml.cs">
+      <DependentUpon>DialogShortcuts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogTest.xaml.cs">
+      <DependentUpon>DialogTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DialogZoomTo.xaml.cs">
+      <DependentUpon>DialogZoomTo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\DocMap.xaml.cs">
+      <DependentUpon>DocMap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\ManagerLabel.cs" />
+    <Compile Include="Utility\ManagerLine.cs" />
+    <Compile Include="Window\DialogSetHeight.xaml.cs">
+      <DependentUpon>DialogSetHeight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\PropertyFeatureGroup.cs" />
+    <Compile Include="Window\PropertyGridOrderer.cs" />
+    <Compile Include="Window\PnlMap.cs" />
+    <Compile Include="Utility\Constant.cs" />
+    <Compile Include="Utility\Data\DataFeature.cs" />
+    <Compile Include="Utility\Data\DataFile.cs" />
+    <Compile Include="Utility\Data\DataType.cs" />
+    <Compile Include="Utility\Logger\Logger.cs" />
+    <Compile Include="Utility\AppSetting.cs" />
+    <Compile Include="Utility\ManagerData.cs" />
+    <Compile Include="Utility\ManagerBrush.cs" />
+    <Compile Include="Utility\ManagerRectangle.cs" />
+    <Compile Include="Utility\Reader\ReaderGff.cs" />
+    <Compile Include="Utility\Reader\ReaderSetting.cs" />
+    <Compile Include="Utility\ManagerWorkspace.cs" />
+    <Compile Include="Utility\UtilityString.cs" />
+    <Compile Include="Window\PnlMapLane.cs" />
+    <Compile Include="Window\PnlMapRuler.cs" />
+    <Compile Include="Window\PropertyFeature.cs" />
+    <Compile Include="Window\PropertyFeatureSelected.cs" />
+    <Compile Include="Window\PropertyVugmap.cs" />
+    <Page Include="Window\ColorPicker\ColorDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Window\ColorPicker\ColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Window\DialogBookmarkAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogChangeType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogFeatureAdd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Window\DialogFeatureAddSize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogFeatureEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogFeatureOpacity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogFeatureOperation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogFileOpen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogIntegrationOperation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogLaneOperation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogPositionTo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogShortcuts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogSetScale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DialogZoomTo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\DocMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Window\DialogSetHeight.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AvalonDock\AvalonDock.csproj">
+      <Project>{2FF700C2-A38A-48BD-A637-8CAFD4FE6237}</Project>
+      <Name>AvalonDock</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Window\ColorPicker\Images\ColorSwatchCircle.png" />
+    <Resource Include="Window\ColorPicker\Images\ColorSwatchSquare.png" />
+    <Resource Include="Window\ColorPicker\Images\ColorSwatchSquare2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ToDo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Introduction.MetaScope.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\AvalonDock\bin\$(Configuration)\AvalonDock.dll">
+      <LogicalName>AvalonDock.dll</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

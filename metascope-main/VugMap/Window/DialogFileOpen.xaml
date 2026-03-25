@@ -1,0 +1,14 @@
+﻿<Window x:Class="VugMap.Window.DialogFileOpen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Reading Files" Icon="../Resources/Icon.gif" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+	<StackPanel Margin="10" Width="{Binding ElementName=m_pnlFileOpen, Path=ActualWidth}" Height="{Binding ElementName=m_pnlFileOpen, Path=ActualHeight}">
+		
+		<Label x:Name="m_lblFileOpen" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom">Reading file(s):</Label>
+		<TextBlock x:Name="m_tbFileOpenFiles" Margin="10" HorizontalAlignment="Center"></TextBlock>
+		<Grid>
+			<ProgressBar x:Name="m_pgbFileOpenReading" Width="400" Height="30" HorizontalAlignment="Center" Minimum="0" Maximum="100"></ProgressBar>
+			<TextBlock Name="m_tbFileOpen" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+		</Grid>		
+	</StackPanel>	
+</Window>

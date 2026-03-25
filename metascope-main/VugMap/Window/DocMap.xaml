@@ -1,0 +1,46 @@
+﻿<ad:DocumentContent x:Class="VugMap.Window.DocMap"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
+		xmlns:local="clr-namespace:VugMap.Window"
+		xmlns:vm ="clr-namespace:VugMap.Window"
+		Title="DocMap" AllowDrop="True" Loaded="OnLoaded" Drop="OnDrop" GotFocus="OnFocus">
+	<Grid Name="m_grdMap" x:FieldModifier="private">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="20"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid Name="m_grdDoc" x:FieldModifier="private" Grid.Row="0" Grid.Column="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="0"/>
+				<RowDefinition Height="0"/>				
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<ScrollViewer Name="m_scvMap" Grid.Row="0" Grid.Column="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Focusable="False" SizeChanged="OnMapSizeChanged">
+				<vm:PnlMap x:Name="m_pnlMap" Background="#F5F5F5" x:FieldModifier="private" VerticalAlignment="Top">
+					<vm:PnlMap.LayoutTransform>
+						<ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+					</vm:PnlMap.LayoutTransform>
+				</vm:PnlMap>				
+			</ScrollViewer>
+			<GridSplitter Name="m_gsDoc" x:FieldModifier="private" MouseMove="OnGridSplitterMouseMove" ResizeDirection="Rows" ResizeBehavior="BasedOnAlignment" Background="DarkGray" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="5"/>
+			<ScrollViewer Name="m_scvMapAlt" Grid.Row="2" Grid.Column="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Focusable="False" SizeChanged="OnMapAltSizeChanged">
+				<Grid>
+					<vm:PnlMap x:Name="m_pnlMapAlt" Visibility="Collapsed" Background="#F5F5F5" x:FieldModifier="private" VerticalAlignment="Top">
+						<vm:PnlMap.LayoutTransform>
+							<ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+						</vm:PnlMap.LayoutTransform>
+					</vm:PnlMap>
+				</Grid>
+			</ScrollViewer>
+		</Grid>
+		<ScrollBar x:Name="m_scbScroll" Orientation="Horizontal" Minimum="0" Maximum="100" Scroll="OnScroll" ViewportSize="{Binding ElementName=Double, Path=MaxValue}" 
+				   Grid.Row="1" Grid.Column="0" x:FieldModifier="private"></ScrollBar>
+	</Grid>	
+</ad:DocumentContent>

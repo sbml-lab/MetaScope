@@ -1,0 +1,26 @@
+
+파일 추가해서 track이 화면 크기를 넘어갈 때 refresh 문제
+Feature menu delete할 때 여러개면 1개만 지워짐
+
+
+* 1.1 or later
+Print
+Auto scaling?
+Show hidden lane
+select left/right
+B+ tree로
+string UTF8로 저장
+File support
+	sequence file
+		FASTA, 
+	others
+		Genbank, GFF, Blast, BED, Wiggle (WIG), Genscan, TUA
+
+TU build
+TU display
+
+workspace explorer에 track show/hide
+
+selection 유지 & bug fix
+
+selection 이동

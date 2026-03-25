@@ -1,0 +1,167 @@
+﻿<Window x:Class="VugMap.Window.DialogFeatureOperation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Feature Operation" Icon="../Resources/Icon.gif" Width="400" SizeToContent="Height" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="30"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<TabControl Name="m_tbcOperation" Grid.Row="0" Grid.Column="0">
+			<TabItem Header="Filter" Name="m_tabFilter" IsEnabled="False">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Features to filter</Label>
+					<TextBox Grid.Row="1" Grid.Column="1" Name="m_tbFilterFeatCount" IsEnabled="False" VerticalAlignment="Center"></TextBox>
+					<Label Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center"> feature(s) selected.</Label>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Filter by removing features with</Label>
+					<RadioButton Name="m_rbFilterOver" IsChecked="True" Checked="OnFilterOverChecked" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center">Scores over</RadioButton>
+					<TextBox Name="m_tbScoreOver" Grid.Row="3" Grid.Column="3" VerticalAlignment="Center"></TextBox>
+					<RadioButton Name="m_rbFilterUnder" Checked="OnFilterOverChecked" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center">Scores under</RadioButton>
+					<TextBox Name="m_tbScoreUnder" Grid.Row="4" Grid.Column="3" VerticalAlignment="Center"></TextBox>
+					<RadioButton Name="m_rbFilterBetween" Checked="OnFilterOverChecked" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center">Scores between</RadioButton>
+					<StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="3">
+						<TextBox Name="m_tbScoreBwMin" VerticalAlignment="Center" Width="95"></TextBox>
+						<Label>-</Label>
+						<TextBox Name="m_tbScoreBwMax" VerticalAlignment="Center" Width="95"></TextBox>
+					</StackPanel>
+					<RadioButton Name="m_rbFilterPercent" Checked="OnFilterOverChecked" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center">Scores under</RadioButton>
+					<StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="3">
+						<TextBox Name="m_tbFilterPercent" VerticalAlignment="Center" Width="95"></TextBox>
+						<Label>% of maximum</Label>						
+					</StackPanel>
+					<Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Filter by selecting features by</Label>
+					<RadioButton Name="m_rbSelectTop" Checked="OnSelectTopChecked" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center">Top features</RadioButton>
+					<TextBox Name="m_tbSelectTop" Grid.Row="8" Grid.Column="3" VerticalAlignment="Center"></TextBox>
+					<RadioButton Name="m_rbSelectTopPercent" Checked="OnSelectTopChecked" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center">Top % features</RadioButton>
+					<TextBox Name="m_tbSelectTopPercent" Grid.Row="9" Grid.Column="3" VerticalAlignment="Center"></TextBox>					
+					<CheckBox Name="m_cbFilterSlide" IsEnabled="False" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Checked="OnFilterSlideChecked" VerticalAlignment="Center">Sliding Window</CheckBox>
+					<TextBox Name="m_tbFilterSlide" IsEnabled="False" Grid.Row="10" Grid.Column="3" VerticalAlignment="Center">0</TextBox>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Merge" Name="m_tabMerge" IsEnabled="False">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="100"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Tracks to merge</Label>
+					<ListBox Name="m_lbMergeLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Tracks to merge</Label>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Merge features by</Label>
+					<RadioButton Name="m_rbMergeAverage" GroupName="MergeMethod" IsChecked="True" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">Taking an average between start and end positions</RadioButton>
+					<RadioButton Name="m_rbMergeMedian" GroupName="MergeMethod" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">Taking a median between start and end positions</RadioButton>
+					<Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* File to save the result into</Label>
+					<RadioButton Name="m_rbMergeFileExisting" GroupName="MergeFile" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center">An existing file</RadioButton>
+					<Label Grid.Row="6" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<ComboBox Name="m_cbMergeFileExisting" Grid.Row="6" Grid.Column="3" VerticalAlignment="Center"></ComboBox>
+					<RadioButton Name="m_rbMergeFileNew" GroupName="MergeFile" IsChecked="True" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center">A new file</RadioButton>
+					<Label Grid.Row="7" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<Grid Grid.Row="7" Grid.Column="3">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="50"/>
+						</Grid.ColumnDefinitions>
+						<TextBox Name="m_tbMergeFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,5,0" Grid.Row="0" Grid.Column="0"></TextBox>
+						<Button Name="m_btnMergeFileNew" Width="50" Grid.Row="0" Grid.Column="1" Click="OnMergeFileNewClick">Search</Button>
+					</Grid>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Move" Name="m_tabMove" IsEnabled="False">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>						
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Features to move</Label>
+					<TextBox Grid.Row="1" Grid.Column="1" Name="m_tbMoveFeatCount" IsEnabled="False" VerticalAlignment="Center"></TextBox>
+					<Label Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center">feature(s) selected.</Label>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Move features to</Label>
+					<ComboBox Name="m_cbMoveLaneTo" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center"></ComboBox>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Copy" Name="m_tabCopy" IsEnabled="False">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Features to move</Label>
+					<TextBox Grid.Row="1" Grid.Column="1" Name="m_tbCopyFeatCount" IsEnabled="False" VerticalAlignment="Center"></TextBox>
+					<Label Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center">feature(s) selected.</Label>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Move features to</Label>
+					<ComboBox Name="m_cbCopyLaneTo" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center"></ComboBox>
+				</Grid>
+			</TabItem>
+		</TabControl>
+		<Grid Grid.Row="1" Grid.Column="0">
+			<StackPanel Name="m_spButton" Orientation="Horizontal" HorizontalAlignment="Center">
+				<Button Name="m_btnOk" HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Click="OnOkClick" IsDefault="True" Margin="5,0,5,0">OK</Button>
+				<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+			</StackPanel>
+			<Grid Name="m_grdProgress" Visibility="Collapsed">
+				<ProgressBar x:Name="m_pgbProgress" Height="25" HorizontalAlignment="Stretch" Minimum="0" Maximum="100"></ProgressBar>
+				<TextBlock Name="m_tbProgress" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+			</Grid>
+		</Grid>
+	</Grid>
+</Window>

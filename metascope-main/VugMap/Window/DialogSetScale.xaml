@@ -1,0 +1,38 @@
+﻿<Window x:Class="VugMap.Window.DialogSetScale"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Set Scale" Icon="../Resources/Icon.gif" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Loaded="OnLoaded">
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>			
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="95"/>
+			<ColumnDefinition Width="15"/>
+			<ColumnDefinition Width="135"/>
+			<ColumnDefinition Width="15"/>			
+		</Grid.ColumnDefinitions>
+		<Label Grid.ColumnSpan="4" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Set scale for the data:</Label>
+		<RadioButton Name="m_rbNone" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">None</RadioButton>
+		<RadioButton Name="m_rbManual" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Manual</RadioButton>
+		<Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
+			<TextBox Name="m_tbNoneMin" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" IsEnabled="False"></TextBox>
+			<Label>-</Label>
+			<TextBox Name="m_tbNoneMax" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" IsEnabled="False"></TextBox>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="2">
+			<TextBox Name="m_tbManualMin" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" GotFocus="OnManualGotFocus"></TextBox>
+			<Label>-</Label>
+			<TextBox Name="m_tbManualMax" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" GotFocus="OnManualGotFocus"></TextBox>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4">
+			<Button Name="m_btnOk" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Click="OnOkClick" IsDefault="True" Margin="5,0,10,0">OK</Button>
+			<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+		</StackPanel>		
+	</Grid>
+</Window>

@@ -1,0 +1,162 @@
+﻿<Window x:Class="VugMap.Window.DialogIntegrationOperation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Integration Operation" Icon="../Resources/Icon.gif" Width="400" SizeToContent="Height" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="30"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<TabControl Name="m_tbcOperation" Grid.Row="0" Grid.Column="0">
+			<TabItem Header="pORF" Name="m_tabPorf" IsEnabled="False">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Start codon track</Label>
+					<ComboBox Name="m_cbPorfStart" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ComboBox>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Stop codon track</Label>
+					<ComboBox Name="m_cbPorfStop" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"></ComboBox>
+					<Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* Proteomic data track</Label>
+					<ComboBox Name="m_cbPorfProteome" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"></ComboBox>
+					<Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* File to save the result into</Label>
+					<RadioButton Name="m_rbPorfFileExisting" GroupName="PorfFile" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center">An existing file</RadioButton>
+					<Label Grid.Row="7" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<ComboBox Name="m_cbPorfFileExisting" Grid.Row="7" Grid.Column="3" VerticalAlignment="Center"></ComboBox>
+					<RadioButton Name="m_rbPorfFileNew" GroupName="PorfFile" IsChecked="True" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center">A new file</RadioButton>
+					<Label Grid.Row="8" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<Grid Grid.Row="8" Grid.Column="3">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="50"/>
+						</Grid.ColumnDefinitions>
+						<TextBox Name="m_tbPorfFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,5,0" Grid.Row="0" Grid.Column="0"></TextBox>
+						<Button Name="m_btnPorfFileNew" Width="50" Grid.Row="0" Grid.Column="1" Click="OnPorfFileNewClick">Search</Button>
+					</Grid>
+				</Grid>
+			</TabItem>
+			<TabItem Header="RTS" Name="m_tabRts" IsEnabled="False">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* RBR track</Label>
+					<ComboBox Name="m_cbRtsRbr" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ComboBox>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* TD track</Label>
+					<ComboBox Name="m_cbRtsTd" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"></ComboBox>
+					<Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* File to save the result into</Label>
+					<RadioButton Name="m_rbRtsFileExisting" GroupName="TuFile" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center">An existing file</RadioButton>
+					<Label Grid.Row="5" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<ComboBox Name="m_cbRtsFileExisting" Grid.Row="5" Grid.Column="3" VerticalAlignment="Center"></ComboBox>
+					<RadioButton Name="m_rbRtsFileNew" GroupName="TuFile" IsChecked="True" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center">A new file</RadioButton>
+					<Label Grid.Row="6" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<Grid Grid.Row="6" Grid.Column="3">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="50"/>
+						</Grid.ColumnDefinitions>
+						<TextBox Name="m_tbRtsFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,5,0" Grid.Row="0" Grid.Column="0"></TextBox>
+						<Button Name="m_btnRtsFileNew" Width="50" Grid.Row="0" Grid.Column="1" Click="OnRtsFileNewClick">Search</Button>
+					</Grid>
+				</Grid>
+			</TabItem>
+			<TabItem Header="TU" Name="m_tabTu" IsEnabled="False">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* TSS track</Label>
+					<ComboBox Name="m_cbTuTss" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ComboBox>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* RTS track</Label>
+					<ComboBox Name="m_cbTuRts" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"></ComboBox>
+					<Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* pORF track</Label>
+					<ComboBox Name="m_cbTuPorf" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"></ComboBox>
+					<Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center">* File to save the result into</Label>
+					<RadioButton Name="m_rbTuFileExisting" GroupName="TuFile" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center">An existing file</RadioButton>
+					<Label Grid.Row="7" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<ComboBox Name="m_cbTuFileExisting" Grid.Row="7" Grid.Column="3" VerticalAlignment="Center"></ComboBox>
+					<RadioButton Name="m_rbTuFileNew" GroupName="TuFile" IsChecked="True" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center">A new file</RadioButton>
+					<Label Grid.Row="8" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<Grid Grid.Row="8" Grid.Column="3">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="50"/>
+						</Grid.ColumnDefinitions>
+						<TextBox Name="m_tbTuFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,5,0" Grid.Row="0" Grid.Column="0"></TextBox>
+						<Button Name="m_btnTuFileNew" Width="50" Grid.Row="0" Grid.Column="1" Click="OnTuFileNewClick">Search</Button>
+					</Grid>
+				</Grid>
+			</TabItem>
+			<TabItem Header="TRN" Name="m_tabTrn" IsEnabled="False" Visibility="Collapsed">
+			</TabItem>
+		</TabControl>
+		<Grid Grid.Row="1" Grid.Column="0">
+			<StackPanel Name="m_spButton" Orientation="Horizontal" HorizontalAlignment="Center">
+				<Button Name="m_btnOk" HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Click="OnOkClick" IsDefault="True" Margin="5,0,5,0">OK</Button>
+				<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+			</StackPanel>
+			<Grid Name="m_grdProgress" Visibility="Collapsed">
+				<ProgressBar x:Name="m_pgbProgress" Height="25" HorizontalAlignment="Stretch" Minimum="0" Maximum="100"></ProgressBar>
+				<TextBlock Name="m_tbProgress" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+			</Grid>
+		</Grid>
+	</Grid>
+</Window>
