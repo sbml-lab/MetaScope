@@ -1,0 +1,23 @@
+<DockingManager>
+    <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="0,0" Orientation="Horizontal">
+        <ResizingPanel ResizeWidth="251" ResizeHeight="*" EffectiveSize="251,1039.04" Orientation="Vertical">
+            <DockablePane ResizeWidth="300" ResizeHeight="0.397020688310584*" EffectiveSize="251,409.344210475744" Anchor="Left">
+                <DockableContent Name="m_dcntSetting" AutoHide="false" FloatingWindowSize="300,640" />
+                <DockableContent Name="m_dcntFeature" AutoHide="false" FloatingWindowSize="256,1033" />
+            </DockablePane>
+            <DockablePane ResizeWidth="*" ResizeHeight="0.380754657254438*" EffectiveSize="251,392.573281815615" Anchor="Left">
+                <DockableContent Name="m_dcntFeatureSelected" AutoHide="false" FloatingWindowSize="300,640" />
+            </DockablePane>
+            <DockablePane ResizeWidth="*" ResizeHeight="0.222224654434979*" EffectiveSize="251,229.12250770864" Anchor="Left">
+                <DockableContent Name="m_dcntSearch" AutoHide="false" FloatingWindowSize="1170,200" />
+                <DockableContent Name="m_dcntLog" AutoHide="false" FloatingWindowSize="1170,200" />
+                <DockableContent Name="m_dcntEdit" AutoHide="false" FloatingWindowSize="300,560" />
+                <DockableContent Name="m_dcntBookmark" AutoHide="false" FloatingWindowSize="300,560" />
+                <DockableContent Name="m_dcntExplorer" AutoHide="false" FloatingWindowSize="300,640" />
+            </DockablePane>
+        </ResizingPanel>
+        <DocumentPanePlaceHolder />
+    </ResizingPanel>
+    <Hidden />
+    <Windows />
+</DockingManager>

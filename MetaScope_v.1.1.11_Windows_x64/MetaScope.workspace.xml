@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Workspace xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Layout.File>MetaScope.Layout.xml</Layout.File>
+  <Layout.Application.ScaleX>1</Layout.Application.ScaleX>
+  <Layout.Application.ScaleY>1</Layout.Application.ScaleY>
+  <Layout.Document.ScaleX>1</Layout.Document.ScaleX>
+  <Layout.Document.ScaleY>1</Layout.Document.ScaleY>
+  <Startup.ShowIntroduction>true</Startup.ShowIntroduction>
+  <Bookmark.List />
+  <Data.File />
+  <Data.Map />
+</Workspace>
