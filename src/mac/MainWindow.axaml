@@ -1,0 +1,274 @@
+<Window x:Class="MetaScope.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:MetaScope"
+	mc:Ignorable="d"
+	x:CompileBindings="False"
+	d:DesignWidth="1024" d:DesignHeight="768"
+	Title="MetaScope v1.2.0"
+	Width="1024" Height="768"
+	WindowState="Maximized"
+	Background="White"
+	FontFamily="-apple-system, 'Helvetica Neue', sans-serif"
+	DragDrop.AllowDrop="True"
+	ExtendClientAreaToDecorationsHint="True"
+	ExtendClientAreaChromeHints="PreferSystemChrome">
+
+	<Window.Styles>
+		<!-- ═══ Tab content stretch ═══ -->
+		<Style Selector="TabControl > ContentPresenter">
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Stretch"/>
+		</Style>
+
+		<!-- ═══ Document tabs: Safari style ═══ -->
+		<Style Selector="TabControl#m_tabDocuments">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style Selector="TabControl#m_tabDocuments TabItem">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Foreground" Value="#5C5C66"/>
+			<Setter Property="FontSize" Value="11"/>
+			<Setter Property="FontWeight" Value="Normal"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+			<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+			<Setter Property="Template">
+				<ControlTemplate TargetType="TabItem">
+					<Border x:Name="PART_Root"
+							Background="Transparent"
+							CornerRadius="100"
+							Padding="26,8"
+							Margin="1,0">
+						<ContentPresenter x:Name="PART_HeaderPresenter"
+										  Content="{TemplateBinding Header}"
+										  HorizontalAlignment="Center"
+										  VerticalAlignment="Center"
+										  FontSize="11"/>
+					</Border>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+		<Style Selector="TabControl#m_tabDocuments TabItem:selected /template/ Border#PART_Root">
+			<Setter Property="Background" Value="White"/>
+			<Setter Property="BorderBrush" Value="#00000018"/>
+			<Setter Property="BorderThickness" Value="0.5"/>
+		</Style>
+		<Style Selector="TabControl#m_tabDocuments TabItem:pointerover /template/ Border#PART_Root">
+			<Setter Property="Background" Value="#D5D5DA"/>
+		</Style>
+		<Style Selector="TabControl#m_tabDocuments TabItem:selected:pointerover /template/ Border#PART_Root">
+			<Setter Property="Background" Value="White"/>
+		</Style>
+		<Style Selector="TabControl#m_tabDocuments TabItem:selected">
+			<Setter Property="Foreground" Value="#1D1D1F"/>
+		</Style>
+		<!-- Close button: Safari style -->
+		<Style Selector="TabControl#m_tabDocuments TabItem Button.tab-close">
+			<Setter Property="Opacity" Value="0"/>
+			<Setter Property="Background" Value="#18000000"/>
+			<Setter Property="Foreground" Value="#666666"/>
+		</Style>
+		<Style Selector="TabControl#m_tabDocuments TabItem:pointerover Button.tab-close">
+			<Setter Property="Opacity" Value="1"/>
+		</Style>
+		<Style Selector="TabControl#m_tabDocuments TabItem Button.tab-close:pointerover">
+			<Setter Property="Background" Value="#50000000"/>
+			<Setter Property="Foreground" Value="#333333"/>
+		</Style>
+
+		<!-- ═══ Status bar ═══ -->
+		<Style Selector="TextBlock.statusbar">
+			<Setter Property="FontFamily" Value="Menlo, 'SF Mono', Consolas, monospace"/>
+			<Setter Property="FontSize" Value="11"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Foreground" Value="#636366"/>
+		</Style>
+
+		<!-- ═══ Splitters ═══ -->
+		<Style Selector="GridSplitter">
+			<Setter Property="Background" Value="#E5E5EA"/>
+		</Style>
+		<Style Selector="GridSplitter:pointerover">
+			<Setter Property="Background" Value="#C7C7CC"/>
+		</Style>
+
+		<!-- ═══ Tree view ═══ -->
+		<Style Selector="TreeView">
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="Margin" Value="0"/>
+		</Style>
+		<Style Selector="TreeViewItem">
+			<Setter Property="FontSize" Value="13"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="Margin" Value="0,-1,0,0"/>
+		</Style>
+		<!-- Reduce FluentTheme internal indentation -->
+		<Style Selector="TreeViewItem /template/ Border#PART_LayoutRoot">
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="Margin" Value="0"/>
+		</Style>
+		<!-- Always reserve space for chevron, but hide it when no children -->
+		<Style Selector="TreeViewItem /template/ ToggleButton#PART_ExpandCollapseChevron">
+			<Setter Property="IsVisible" Value="True"/>
+		</Style>
+		<Style Selector="TreeViewItem:empty /template/ ToggleButton#PART_ExpandCollapseChevron">
+			<Setter Property="Opacity" Value="0"/>
+			<Setter Property="IsHitTestVisible" Value="False"/>
+		</Style>
+
+		<!-- ═══ Float button ═══ -->
+		<Style Selector="Button.float-btn">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="Padding" Value="6,2"/>
+			<Setter Property="FontSize" Value="13"/>
+			<Setter Property="Foreground" Value="#86868B"/>
+			<Setter Property="Cursor" Value="Hand"/>
+		</Style>
+		<Style Selector="Button.float-btn:pointerover">
+			<Setter Property="Foreground" Value="#1D1D1F"/>
+		</Style>
+	</Window.Styles>
+
+	<DockPanel x:Name="m_dpMain" LastChildFill="True">
+		<LayoutTransformControl>
+			<LayoutTransformControl.LayoutTransform>
+				<ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+			</LayoutTransformControl.LayoutTransform>
+
+			<DockPanel LastChildFill="True" Margin="0,34,0,0">
+				<Menu DockPanel.Dock="Top" x:Name="m_mnuMain"/>
+
+				<!-- STATUS BAR -->
+				<Border DockPanel.Dock="Bottom" BorderThickness="0,0.5,0,0" BorderBrush="#D5D5D5"
+					Padding="10,6" Background="#F0F0F0">
+					<StackPanel Orientation="Horizontal" Spacing="4">
+						<TextBlock x:Name="m_tbStatusPosition" Classes="statusbar" Text="Ready" Width="200"/>
+						<TextBlock Classes="statusbar" Text="|" Foreground="#C7C7CC"/>
+						<TextBlock x:Name="m_tbStatusZoom" Classes="statusbar" Text="" Width="100"/>
+						<TextBlock Classes="statusbar" Text="|" Foreground="#C7C7CC"/>
+						<TextBlock x:Name="m_tbStatusFeatureCount" Classes="statusbar" Text="" Width="150"/>
+						<TextBlock Classes="statusbar" Text="|" Foreground="#C7C7CC"/>
+						<TextBlock x:Name="m_tbStatusFileName" Classes="statusbar" Text="" Width="300"/>
+					</StackPanel>
+				</Border>
+
+				<!-- MAIN CONTENT -->
+				<Grid x:Name="m_grdContent">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="0"/>
+						<RowDefinition Height="0"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3*"/>
+						<ColumnDefinition Width="4"/>
+						<ColumnDefinition Width="300"/>
+					</Grid.ColumnDefinitions>
+
+					<!-- DOCUMENT PANE -->
+					<TabControl x:Name="m_tabDocuments" Classes="safari-tabs"
+						Grid.Row="0" Grid.Column="0"
+						TabStripPlacement="Top"
+						Theme="{x:Null}"
+						HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+						HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+						<TabControl.Template>
+							<ControlTemplate TargetType="TabControl">
+								<DockPanel>
+									<Border DockPanel.Dock="Top" Background="#DFDFE4"
+										Padding="1.5,1.5,1,1" Margin="6" CornerRadius="100">
+										<ItemsPresenter Name="PART_ItemsPresenter" Margin="0">
+											<ItemsPresenter.ItemsPanel>
+												<ItemsPanelTemplate>
+													<StackPanel Orientation="Horizontal" Spacing="0" Margin="0"/>
+												</ItemsPanelTemplate>
+											</ItemsPresenter.ItemsPanel>
+										</ItemsPresenter>
+									</Border>
+									<ContentPresenter Name="PART_SelectedContentHost"
+										Content="{TemplateBinding SelectedContent}"
+										ContentTemplate="{TemplateBinding SelectedContentTemplate}"
+										HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+								</DockPanel>
+							</ControlTemplate>
+						</TabControl.Template>
+					</TabControl>
+
+					<!-- VERTICAL SPLITTER -->
+					<GridSplitter Grid.Row="0" Grid.RowSpan="3" Grid.Column="1"
+						ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Width="4"/>
+
+					<!-- RIGHT TOOL PANE -->
+					<Border x:Name="m_bdrTools" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2"
+						Background="#F2F2F7" BorderThickness="0.5,0,0,0" BorderBrush="#D5D5D5">
+						<DockPanel>
+							<Border DockPanel.Dock="Top" Padding="12,8" Background="#E5E5EA"
+								BorderThickness="0,0,0,0.5" BorderBrush="#D5D5D5">
+								<Grid>
+									<TextBlock Text="Inspector" FontSize="13" FontWeight="SemiBold"
+										Foreground="#1D1D1F" VerticalAlignment="Center"/>
+									<Button x:Name="m_btnFloatTools" Classes="float-btn"
+										Content="▤" HorizontalAlignment="Right"
+										ToolTip.Tip="Float panel" Click="OnFloatToolsClick"/>
+								</Grid>
+							</Border>
+							<TabControl x:Name="m_tabTools" TabStripPlacement="Top"
+								HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+								HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+								<TabItem Header="Workspace Explorer" x:Name="m_tabExplorer">
+									<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+										<TreeView x:Name="m_trvFile" DragDrop.AllowDrop="True" Background="Transparent" Margin="-8,0,0,0">
+											<TreeViewItem Header="File" x:Name="m_tviFile" IsExpanded="True"/>
+											<TreeViewItem Header="Chromosome ID" x:Name="m_tviSequenceId" IsExpanded="True"/>
+											<TreeViewItem Header="Type" x:Name="m_tviType" IsExpanded="True"/>
+										</TreeView>
+									</ScrollViewer>
+								</TabItem>
+								<TabItem Header="Edit" x:Name="m_tabEdit">
+									<ListBox x:Name="m_ltvEdit" Background="Transparent"/>
+								</TabItem>
+								<TabItem Header="Bookmark" x:Name="m_tabBookmark">
+									<ListBox x:Name="m_ltvBookmark" Background="Transparent"/>
+								</TabItem>
+								<TabItem Header="Feature Selected" x:Name="m_tabFeatureSelected">
+									<ListBox x:Name="m_ltvFeatureSelected" Background="Transparent"/>
+								</TabItem>
+								<TabItem Header="Feature" x:Name="m_tabFeature">
+									<ListBox x:Name="m_ltvFeature" Background="Transparent"/>
+								</TabItem>
+							</TabControl>
+						</DockPanel>
+					</Border>
+
+					<!-- HORIZONTAL SPLITTER -->
+					<GridSplitter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+						ResizeDirection="Rows" ResizeBehavior="PreviousAndNext"
+						Height="4" HorizontalAlignment="Stretch"/>
+
+					<!-- BOTTOM PANE -->
+					<Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="0,0.5,0,0" BorderBrush="#D5D5D5">
+						<TabControl x:Name="m_tabBottom" TabStripPlacement="Top">
+							<TabItem Header="Search" x:Name="m_tabSearch">
+								<ListBox x:Name="m_ltvSearch" Background="Transparent"/>
+							</TabItem>
+							<TabItem Header="Log" x:Name="m_tabLog" IsVisible="False">
+								<TextBox x:Name="m_tbLogLog" FontFamily="Menlo, 'SF Mono', Consolas, monospace"
+									FontSize="11" IsReadOnly="True" AcceptsReturn="True"
+									TextWrapping="Wrap" Margin="8" Background="Transparent"/>
+							</TabItem>
+						</TabControl>
+					</Border>
+				</Grid>
+			</DockPanel>
+		</LayoutTransformControl>
+	</DockPanel>
+</Window>

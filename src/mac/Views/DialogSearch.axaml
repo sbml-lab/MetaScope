@@ -1,0 +1,77 @@
+<Window x:Class="MetaScope.Views.DialogSearch"
+		xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+		Title="Search" Width="400" SizeToContent="Height" WindowStartupLocation="CenterOwner" CanResize="False">
+	<Window.Styles>
+		<Style Selector="TextBox">
+			<Setter Property="Padding" Value="6,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+		</Style>
+		<Style Selector="Label">
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style Selector="ComboBox">
+			<Setter Property="Padding" Value="6,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+		</Style>
+		<Style Selector="RadioButton">
+			<Setter Property="Padding" Value="6,3"/>
+			<Setter Property="MinHeight" Value="0"/>
+		</Style>
+		<Style Selector="CheckBox">
+			<Setter Property="Padding" Value="6,3"/>
+			<Setter Property="MinHeight" Value="0"/>
+		</Style>
+		<Style Selector="Button">
+			<Setter Property="Padding" Value="8,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="RadioButton /template/ Ellipse">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
+		</Style>
+		<Style Selector="CheckBox /template/ Border#NormalRectangle">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
+		</Style>
+	</Window.Styles>
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="90"/>
+			<ColumnDefinition Width="15"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Search for</Label>
+		<Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<TextBox Name="m_tbSearch" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+		<Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Look in</Label>
+		<Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<ComboBox Name="m_cbLookIn" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+			<ComboBoxItem Name="m_cbiCurrentId">Current chromosome ID</ComboBoxItem>
+			<ComboBoxItem Name="m_cbiAllId" IsSelected="True">All chromosome IDs</ComboBoxItem>
+		</ComboBox>
+		<CheckBox Name="m_ckbCase" IsChecked="True" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">Case sensitive</CheckBox>
+		<StackPanel Name="m_splButton" Margin="0,2,0,0" Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+			<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+			<Button Name="m_btnOk" Classes="accent" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Click="OnOkClick" IsDefault="True" Margin="5,0,5,0">OK</Button>
+		</StackPanel>
+		<ProgressBar Name="m_pbSearch" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="False" Width="300" Height="25"></ProgressBar>
+	</Grid>
+</Window>

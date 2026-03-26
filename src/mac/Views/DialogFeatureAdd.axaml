@@ -1,0 +1,90 @@
+<Window x:Class="MetaScope.Views.DialogFeatureAdd"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add a Feature" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" CanResize="False">
+	<Window.Styles>
+		<Style Selector="TextBox">
+			<Setter Property="Padding" Value="6,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+		</Style>
+		<Style Selector="Label">
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style Selector="ComboBox">
+			<Setter Property="Padding" Value="6,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+		</Style>
+		<Style Selector="RadioButton">
+			<Setter Property="Padding" Value="6,3"/>
+			<Setter Property="MinHeight" Value="0"/>
+		</Style>
+		<Style Selector="CheckBox">
+			<Setter Property="Padding" Value="6,3"/>
+			<Setter Property="MinHeight" Value="0"/>
+		</Style>
+		<Style Selector="Button">
+			<Setter Property="Padding" Value="8,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="RadioButton /template/ Ellipse">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
+		</Style>
+		<Style Selector="CheckBox /template/ Border#NormalRectangle">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
+		</Style>
+	</Window.Styles>
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="90"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="95"/>
+			<ColumnDefinition Width="15"/>
+			<ColumnDefinition Width="180"/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+		<Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Source</Label>
+		<Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<TextBox Name="m_tbSource" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+		<Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Start</Label>
+		<Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<TextBox Name="m_tbStart" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+		<Button Name="m_btnSize" Grid.Row="1" Grid.Column="3" Width="28" Height="28" Margin="4,0,0,0" Click="OnSizeClick" ToolTip.Tip="Set feature size" VerticalAlignment="Center">></Button>
+		<Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">End</Label>
+		<Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<TextBox Name="m_tbEnd" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+		<Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Score</Label>
+		<Label Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<TextBox Name="m_tbScore" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">0.0</TextBox>
+		<Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">Strand</Label>
+		<Label Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<TextBox Name="m_tbStrand" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">.</TextBox>
+		<Label Grid.Row="5" Grid.Column="0" VerticalAlignment="Center">Phase</Label>
+		<Label Grid.Row="5" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<TextBox Name="m_tbPhase" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">.</TextBox>
+		<Label Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" Margin="0,6,0,0">Attribute</Label>
+		<Label Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="0,6,0,0">:</Label>
+		<TextBox Name="m_tbAttribute" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap"></TextBox>
+		<StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,4,0,0">
+			<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+			<Button Name="m_btnOk" Classes="accent" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Click="OnOkClick" IsDefault="True" Margin="5,0,5,0">OK</Button>
+		</StackPanel>
+	</Grid>
+</Window>

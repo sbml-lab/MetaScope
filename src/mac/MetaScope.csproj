@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>MetaScope</RootNamespace>
+		<AssemblyName>MetaScope</AssemblyName>
+		<Version>1.2.0</Version>
+		<ApplicationIcon>MetaScope_mac.ico</ApplicationIcon>
+		<Nullable>disable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.2.3" />
+		<PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.2.3" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.2.3" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.3" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
+		<PackageReference Include="Dock.Avalonia" Version="11.2.0.2" />
+		<PackageReference Include="Dock.Model.Mvvm" Version="11.2.0.2" />
+	</ItemGroup>
+
+</Project>

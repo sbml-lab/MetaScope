@@ -1,0 +1,353 @@
+<Window x:Class="MetaScope.Views.DialogLaneOperation"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	Title="Track Operation" Width="460" SizeToContent="Height" WindowStartupLocation="CenterOwner" CanResize="False">
+	<Window.Styles>
+		<Style Selector="TextBox">
+			<Setter Property="Padding" Value="6,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+			<Setter Property="Margin" Value="0,2,0,2"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Label">
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style Selector="ComboBox">
+			<Setter Property="Padding" Value="6,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+		</Style>
+		<Style Selector="RadioButton">
+			<Setter Property="Padding" Value="6,3"/>
+			<Setter Property="MinHeight" Value="0"/>
+		</Style>
+		<Style Selector="CheckBox">
+			<Setter Property="Padding" Value="6,3"/>
+			<Setter Property="MinHeight" Value="0"/>
+		</Style>
+		<Style Selector="Button">
+			<Setter Property="Padding" Value="8,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="RadioButton /template/ Ellipse">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
+		</Style>
+		<Style Selector="CheckBox /template/ Border#NormalRectangle">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
+		</Style>
+	</Window.Styles>
+	<Grid Margin="12,4,12,10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<TabControl Name="m_tbcOperation" Grid.Row="0" Grid.Column="0" Padding="0">
+			<TabItem Header="Average" Name="m_tabAverage">
+				<Grid Margin="8,0,8,2">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="100"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="120"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to make average</Label>
+					<ListBox Name="m_lbAverageLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks are</Label>
+					<RadioButton Name="m_rbAverageCompatible" GroupName="AverageCompatible" IsChecked="True" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">Compatible</RadioButton>
+					<RadioButton Name="m_rbAverageNotcompatible" GroupName="AverageCompatible" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">Not compatible (Excluding non-reproducible signals)</RadioButton>
+					<Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Make average by</Label>
+					<RadioButton Name="m_rbAverageByMedian" GroupName="AverageBy" IsChecked="True" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">Taking a median</RadioButton>
+					<RadioButton Name="m_rbAverageByAverage" GroupName="AverageBy" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">Taking an average</RadioButton>
+					<Label Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* File to save the result into</Label>
+					<RadioButton Name="m_rbAverageFileExisting" GroupName="AverageFile" IsChecked="True" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center">An existing file</RadioButton>
+					<Label Grid.Row="9" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<ComboBox x:Name="m_cbAverageFileExisting" Grid.Row="9" Grid.Column="3" VerticalAlignment="Center"></ComboBox>
+					<RadioButton Name="m_rbAverageFileNew" GroupName="AverageFile" IsChecked="True" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center">A new file</RadioButton>
+					<Label Grid.Row="10" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<Grid Grid.Row="10" Grid.Column="3">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="70"/>
+						</Grid.ColumnDefinitions>
+						<TextBox Name="m_tbAverageFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0"></TextBox>
+						<Button Name="m_btnAverageFileNew" Width="70" Grid.Row="0" Grid.Column="1" Click="OnAverageFileNewClick">Search</Button>
+					</Grid>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Difference" Name="m_tabDiff">
+				<Grid Margin="8,0,8,2">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="100"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="120"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to make difference</Label>
+					<ListBox Name="m_lbDiffLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Lane to make difference by</Label>
+					<TextBox Name="m_tbDiffBy" IsEnabled="False" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"></TextBox>
+					<Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* File to save the result into</Label>
+					<RadioButton Name="m_rbDiffFileExisting" GroupName="FilterFile" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center">An existing file</RadioButton>
+					<Label Grid.Row="5" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<ComboBox Name="m_cbDiffFileExisting" Grid.Row="5" Grid.Column="3" VerticalAlignment="Center"></ComboBox>
+					<RadioButton Name="m_rbDiffFileNew" GroupName="FilterFile" IsChecked="True" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center">A new file</RadioButton>
+					<Label Grid.Row="6" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<Grid Grid.Row="6" Grid.Column="3">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="70"/>
+						</Grid.ColumnDefinitions>
+						<TextBox Name="m_tbDiffFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0"></TextBox>
+						<Button Name="m_btnDiffFileNew" Width="70" Grid.Row="0" Grid.Column="1" Click="OnDiffFileNewClick">Search</Button>
+					</Grid>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Summation" Name="m_tabSum">
+				<Grid Margin="8,0,8,2">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="100"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="120"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to make summation</Label>
+					<ListBox Name="m_lbSumLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks are</Label>
+					<RadioButton Name="m_rbSumCompatible" GroupName="SumCompatible" IsChecked="True" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">Compatible</RadioButton>
+					<RadioButton Name="m_rbSumNotcompatible" GroupName="SumCompatible" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">Not compatible (Excluding non-reproducible signals)</RadioButton>
+					<Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* File to save the result into</Label>
+					<RadioButton Name="m_rbSumFileExisting" GroupName="SumFile" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center">An existing file</RadioButton>
+					<Label Grid.Row="6" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<ComboBox Name="m_cbSumFileExisting" Grid.Row="6" Grid.Column="3" VerticalAlignment="Center"></ComboBox>
+					<RadioButton Name="m_rbSumFileNew" GroupName="SumFile" IsChecked="True" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center">A new file</RadioButton>
+					<Label Grid.Row="7" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<Grid Grid.Row="7" Grid.Column="3">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="70"/>
+						</Grid.ColumnDefinitions>
+						<TextBox Name="m_tbSumFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0"></TextBox>
+						<Button Name="m_btnSumFileNew" Width="70" Grid.Row="0" Grid.Column="1" Click="OnSumFileNewClick">Search</Button>
+					</Grid>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Merge" Name="m_tabMerge">
+				<Grid Margin="8,0,8,2">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="100"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="120"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to merge</Label>
+					<ListBox Name="m_lbMergeLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Merge features by</Label>
+					<RadioButton Name="m_rbMergeAverage" GroupName="MergeMethod" IsChecked="True" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">Taking an average between start and end positions</RadioButton>
+					<RadioButton Name="m_rbMergeMedian" GroupName="MergeMethod" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">Taking a median between start and end positions</RadioButton>
+					<Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* File to save the result into</Label>
+					<RadioButton Name="m_rbMergeFileExisting" GroupName="MergeFile" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center">An existing file</RadioButton>
+					<Label Grid.Row="6" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<ComboBox Name="m_cbMergeFileExisting" Grid.Row="6" Grid.Column="3" VerticalAlignment="Center"></ComboBox>
+					<RadioButton Name="m_rbMergeFileNew" GroupName="MergeFile" IsChecked="True" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center">A new file</RadioButton>
+					<Label Grid.Row="7" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<Grid Grid.Row="7" Grid.Column="3">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="70"/>
+						</Grid.ColumnDefinitions>
+						<TextBox Name="m_tbMergeFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0"></TextBox>
+						<Button Name="m_btnMergeFileNew" Width="70" Grid.Row="0" Grid.Column="1" Click="OnMergeFileNewClick">Search</Button>
+					</Grid>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Filter" Name="m_tabFilter">
+				<Grid Margin="8,0,8,2">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="100"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="120"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to filter out</Label>
+					<ListBox Name="m_lbFilterLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Lane to filter by</Label>
+					<TextBox Name="m_tbFilterBy" IsEnabled="False" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"></TextBox>
+					<Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Filter out features which are</Label>
+					<RadioButton Name="m_rbFilterOutside" IsChecked="True" GroupName="FilterMethod" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center">outside filter</RadioButton>
+					<RadioButton Name="m_rbFilterInside" GroupName="FilterMethod" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center">inside filter</RadioButton>
+					<Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* File to save the result into</Label>
+					<RadioButton Name="m_rbFilterFileExisting" GroupName="FilterFile" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center">An existing file</RadioButton>
+					<Label Grid.Row="8" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<ComboBox Name="m_cbFilterFileExisting" Grid.Row="8" Grid.Column="3" VerticalAlignment="Center"></ComboBox>
+					<RadioButton Name="m_rbFilterFileNew" GroupName="FilterFile" IsChecked="True" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center">A new file</RadioButton>
+					<Label Grid.Row="9" Grid.Column="2" VerticalAlignment="Center">:</Label>
+					<Grid Grid.Row="9" Grid.Column="3">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="70"/>
+						</Grid.ColumnDefinitions>
+						<TextBox Name="m_tbFilterFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0"></TextBox>
+						<Button Name="m_btnFilterFileNew" Width="70" Grid.Row="0" Grid.Column="1" Click="OnFilterFileNewClick">Search</Button>
+					</Grid>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Adjust" Name="m_tabAdjust">
+				<Grid Margin="8,0,8,2">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="100"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="120"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to adjust</Label>
+					<ListBox Name="m_lbAdjustLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Adjust score</Label>
+					<RadioButton Name="m_rbAdjustMultiply" GroupName="Adjust" IsChecked="True" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">Multiply by</RadioButton>
+					<TextBox Name="m_tbAdjustMultiply" Grid.Row="3" Grid.Column="3" VerticalAlignment="Center"></TextBox>
+					<RadioButton Name="m_rbAdjustShift" GroupName="Adjust" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">Shift by</RadioButton>
+					<TextBox Name="m_tbAdjustShift" Grid.Row="4" Grid.Column="3" VerticalAlignment="Center"></TextBox>
+					<Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Adjust width</Label>
+					<RadioButton Name="m_rbAdjustWidth" GroupName="Adjust" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center">Change to</RadioButton>
+					<TextBox Name="m_tbAdjustWidth" Grid.Row="6" Grid.Column="3" VerticalAlignment="Center"></TextBox>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Assign ID" Name="m_tabAssignId">
+				<Grid Margin="8,0,8,2">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="100"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="Auto" MinHeight="28"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="120"/>
+						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="10"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to assign ID</Label>
+					<ListBox Name="m_lbAssignIdLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
+					<Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* ID pattern</Label>
+					<TextBox Name="m_tbAssignIdPattern" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" Text="ID%COUNT%"></TextBox>
+					<Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">%COUNT%, %POSITION% are available for numbering.</Label>
+				</Grid>
+			</TabItem>
+		</TabControl>
+		<Grid Grid.Row="1" Grid.Column="0">
+			<StackPanel Name="m_spButton" Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+				<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+				<Button Name="m_btnOk" Classes="accent" HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Click="OnOkClick" IsDefault="True" Margin="5,0,5,0">OK</Button>
+			</StackPanel>
+			<Grid Name="m_grdProgress" IsVisible="False">
+				<ProgressBar x:Name="m_pgbProgress" Height="25" HorizontalAlignment="Stretch" Minimum="0" Maximum="100"></ProgressBar>
+				<TextBlock Name="m_tbProgress" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+			</Grid>
+		</Grid>
+	</Grid>
+</Window>

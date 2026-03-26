@@ -1,0 +1,62 @@
+<UserControl x:Class="MetaScope.Views.DocMap"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:MetaScope.Controls"
+	mc:Ignorable="d"
+	d:DesignWidth="800" d:DesignHeight="600"
+	HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+	DragDrop.AllowDrop="True">
+
+	<Grid Name="m_grdMap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="18"/>
+		</Grid.RowDefinitions>
+
+		<Grid Name="m_grdDoc" Grid.Row="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="0"/>
+				<RowDefinition Height="0"/>
+			</Grid.RowDefinitions>
+
+			<!-- Main map view -->
+			<ScrollViewer Name="m_scvMap" Grid.Row="0"
+				HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto"
+				Focusable="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+				<LayoutTransformControl Name="m_ltcMap" HorizontalAlignment="Stretch">
+					<LayoutTransformControl.LayoutTransform>
+						<ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+					</LayoutTransformControl.LayoutTransform>
+					<local:PnlMap x:Name="m_pnlMap" Background="#FFFFFF"
+						HorizontalAlignment="Stretch" MinHeight="300"/>
+				</LayoutTransformControl>
+			</ScrollViewer>
+
+			<!-- Split view splitter -->
+			<GridSplitter Name="m_gsDoc" Grid.Row="1"
+				ResizeDirection="Rows" ResizeBehavior="BasedOnAlignment"
+				Background="#E0E0E0" HorizontalAlignment="Stretch"
+				VerticalAlignment="Center" Height="4" IsVisible="False"/>
+
+			<!-- Alt map view (split) -->
+			<ScrollViewer Name="m_scvMapAlt" Grid.Row="2"
+				HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto"
+				Focusable="False">
+				<LayoutTransformControl Name="m_ltcMapAlt">
+					<LayoutTransformControl.LayoutTransform>
+						<ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+					</LayoutTransformControl.LayoutTransform>
+					<local:PnlMap x:Name="m_pnlMapAlt" IsVisible="False"
+						Background="#FFFFFF" VerticalAlignment="Top"/>
+				</LayoutTransformControl>
+			</ScrollViewer>
+		</Grid>
+
+		<!-- Horizontal scrollbar -->
+		<ScrollBar x:Name="m_scbScroll" Grid.Row="1"
+			Orientation="Horizontal" Minimum="0" Maximum="100"/>
+	</Grid>
+</UserControl>

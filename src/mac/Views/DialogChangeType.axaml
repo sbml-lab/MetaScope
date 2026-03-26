@@ -1,0 +1,71 @@
+<Window x:Class="MetaScope.Views.DialogChangeType"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Change Type" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" CanResize="False">
+	<Window.Styles>
+		<Style Selector="TextBox">
+			<Setter Property="Padding" Value="6,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+		</Style>
+		<Style Selector="Label">
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style Selector="ComboBox">
+			<Setter Property="Padding" Value="6,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+		</Style>
+		<Style Selector="RadioButton">
+			<Setter Property="Padding" Value="6,3"/>
+			<Setter Property="MinHeight" Value="0"/>
+		</Style>
+		<Style Selector="CheckBox">
+			<Setter Property="Padding" Value="6,3"/>
+			<Setter Property="MinHeight" Value="0"/>
+		</Style>
+		<Style Selector="Button">
+			<Setter Property="Padding" Value="8,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="RadioButton /template/ Ellipse">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
+		</Style>
+		<Style Selector="CheckBox /template/ Border#NormalRectangle">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
+		</Style>
+	</Window.Styles>
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="Auto" MinHeight="28"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="95"/>
+			<ColumnDefinition Width="15"/>
+			<ColumnDefinition Width="330"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Label Grid.ColumnSpan="4" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Change type of the track:</Label>
+		<Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Current type</Label>
+		<Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">New type</Label>
+		<Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">:</Label>
+		<TextBox Name="m_tbCurrent" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" IsEnabled="False"></TextBox>
+		<TextBox Name="m_tbToSet" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330"></TextBox>
+		<StackPanel Orientation="Horizontal" Margin="0,2,0,0" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+			<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="210" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+			<Button Name="m_btnOk" Classes="accent" HorizontalAlignment="Left" VerticalAlignment="Center" Width="210" Click="OnOkClick" IsDefault="True" Margin="5,0,10,0">OK</Button>
+		</StackPanel>
+	</Grid>
+</Window>

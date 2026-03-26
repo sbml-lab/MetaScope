@@ -1,0 +1,285 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="MetaScope.App"
+             RequestedThemeVariant="Light">
+
+	<Application.Resources>
+		<!-- ═══ macOS System Blue — overrides FluentTheme accent ═══ -->
+		<Color x:Key="SystemAccentColor">#007AFF</Color>
+		<Color x:Key="SystemAccentColorDark1">#0066D6</Color>
+		<Color x:Key="SystemAccentColorDark2">#004EA2</Color>
+		<Color x:Key="SystemAccentColorDark3">#003D82</Color>
+		<Color x:Key="SystemAccentColorLight1">#3395FF</Color>
+		<Color x:Key="SystemAccentColorLight2">#66B0FF</Color>
+		<Color x:Key="SystemAccentColorLight3">#99CCFF</Color>
+
+		<!-- ScrollBar thumb overrides -->
+		<SolidColorBrush x:Key="ScrollBarThumbFill" Color="#88888888"/>
+		<SolidColorBrush x:Key="ScrollBarThumbFillPointerOver" Color="#BB666666"/>
+		<SolidColorBrush x:Key="ScrollBarThumbFillPressed" Color="#CC555555"/>
+		<SolidColorBrush x:Key="ScrollBarTrackFill" Color="Transparent"/>
+		<SolidColorBrush x:Key="ScrollBarTrackFillPointerOver" Color="#08000000"/>
+		<CornerRadius x:Key="ScrollBarThumbCornerRadius">6</CornerRadius>
+
+		<!-- ContextMenu / MenuFlyout transparency overrides -->
+		<SolidColorBrush x:Key="MenuFlyoutPresenterBackground" Color="#D9F6F6F6"/>
+		<SolidColorBrush x:Key="MenuFlyoutPresenterBorderBrush" Color="#33000000"/>
+		<Thickness x:Key="MenuFlyoutPresenterBorderThemeThickness">0.5</Thickness>
+		<CornerRadius x:Key="OverlayCornerRadius">8</CornerRadius>
+	</Application.Resources>
+
+	<Application.Styles>
+		<FluentTheme />
+		<StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml"/>
+
+		<!-- ═══ macOS Window defaults ═══ -->
+		<Style Selector="Window">
+			<Setter Property="Background" Value="#F6F6F6"/>
+			<Setter Property="FontFamily" Value="-apple-system, 'Helvetica Neue', sans-serif"/>
+			<Setter Property="FontSize" Value="13"/>
+		</Style>
+
+		<!-- ═══ Menu: remove bottom border line ═══ -->
+		<Style Selector="Menu">
+			<Setter Property="BorderThickness" Value="0"/>
+		</Style>
+
+		<!-- ═══ Button: rounded macOS-style ═══ -->
+		<Style Selector="Button">
+			<Setter Property="CornerRadius" Value="6"/>
+			<Setter Property="Padding" Value="12,4"/>
+			<Setter Property="FontSize" Value="13"/>
+		</Style>
+
+		<!-- Primary action button -->
+		<Style Selector="Button.accent">
+			<Setter Property="Background" Value="#007AFF"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="BorderBrush" Value="#006ADB"/>
+		</Style>
+		<Style Selector="Button.accent:pointerover">
+			<Setter Property="Background" Value="#0066D6"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style Selector="Button.accent:pressed">
+			<Setter Property="Background" Value="#004EA2"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+
+		<!-- ═══ TextBox: rounded, macOS sizing ═══ -->
+		<Style Selector="TextBox">
+			<Setter Property="CornerRadius" Value="6"/>
+			<Setter Property="FontSize" Value="13"/>
+		</Style>
+
+		<!-- ═══ ComboBox: rounded ═══ -->
+		<Style Selector="ComboBox">
+			<Setter Property="CornerRadius" Value="6"/>
+			<Setter Property="FontSize" Value="13"/>
+		</Style>
+
+		<!-- ═══ Label ═══ -->
+		<Style Selector="Label">
+			<Setter Property="FontSize" Value="13"/>
+			<Setter Property="Foreground" Value="#1D1D1F"/>
+		</Style>
+
+		<!-- ═══ CheckBox / RadioButton ═══ -->
+		<Style Selector="CheckBox">
+			<Setter Property="FontSize" Value="13"/>
+		</Style>
+		<Style Selector="RadioButton">
+			<Setter Property="FontSize" Value="13"/>
+		</Style>
+
+		<!-- ═══ ListBox: rounded, horizontal scroll ═══ -->
+		<Style Selector="ListBox">
+			<Setter Property="CornerRadius" Value="6"/>
+			<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+		</Style>
+		<Style Selector="ListBoxItem">
+			<Setter Property="FontSize" Value="11"/>
+			<Setter Property="Padding" Value="6,3"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="FontFamily" Value="Menlo, 'SF Mono', Consolas, monospace"/>
+		</Style>
+		<Style Selector="ListBoxItem TextBlock">
+			<Setter Property="TextWrapping" Value="Wrap"/>
+		</Style>
+
+		<!-- ═══ ProgressBar: rounded track ═══ -->
+		<Style Selector="ProgressBar">
+			<Setter Property="CornerRadius" Value="4"/>
+		</Style>
+
+		<!-- ═══ Tab headers (global — applies to all windows) ═══ -->
+		<Style Selector="TabItem">
+			<Setter Property="FontSize" Value="13"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="Foreground" Value="#AEAEB2"/>
+			<Setter Property="Padding" Value="14,10"/>
+		</Style>
+		<Style Selector="TabItem:selected">
+			<Setter Property="Foreground" Value="#1D1D1F"/>
+		</Style>
+
+		<!-- ═══ Safari-style capsule tabs (document pane only) ═══ -->
+		<Style Selector="TabControl.safari-tabs">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="Template">
+				<ControlTemplate TargetType="TabControl">
+					<Grid RowDefinitions="Auto,*" Background="White">
+						<Border Grid.Row="0" Background="#DCDCDC" CornerRadius="100"
+							Padding="0" Margin="6,1,6,0" Height="30" ClipToBounds="True">
+							<ItemsPresenter Name="PART_ItemsPresenter"
+								VerticalAlignment="Center"
+								ItemsPanel="{TemplateBinding ItemsPanel}"/>
+						</Border>
+						<Border Grid.Row="1" Name="PART_SelectedContentBorder" Margin="0,1,0,0" Background="White">
+							<ContentPresenter Name="PART_SelectedContentHost"
+								Content="{TemplateBinding SelectedContent}"
+								ContentTemplate="{TemplateBinding SelectedContentTemplate}"
+								HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+								VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+		<Style Selector="TabControl.safari-tabs TabItem">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Foreground" Value="#86868B"/>
+			<Setter Property="FontSize" Value="12"/>
+			<Setter Property="FontWeight" Value="Normal"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="Margin" Value="1,1"/>
+			<Setter Property="CornerRadius" Value="100"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="26"/>
+		</Style>
+		<Style Selector="TabControl.safari-tabs TabItem /template/ Border#PART_LayoutRoot">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="CornerRadius" Value="100"/>
+			<Setter Property="Padding" Value="12,0"/>
+			<Setter Property="Margin" Value="0"/>
+		</Style>
+		<Style Selector="TabControl.safari-tabs TabItem /template/ Border#PART_SelectedPipe">
+			<Setter Property="IsVisible" Value="False"/>
+			<Setter Property="Height" Value="0"/>
+			<Setter Property="Margin" Value="0"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style Selector="TabControl.safari-tabs TabItem /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Margin" Value="0"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="TabControl.safari-tabs TabItem:pointerover /template/ Border#PART_LayoutRoot">
+			<Setter Property="Background" Value="#14000000"/>
+		</Style>
+		<Style Selector="TabControl.safari-tabs TabItem:selected">
+			<Setter Property="Foreground" Value="#1D1D1F"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+		</Style>
+		<Style Selector="TabControl.safari-tabs TabItem:selected /template/ Border#PART_LayoutRoot">
+			<Setter Property="Background" Value="#F6F6F6"/>
+			<Setter Property="CornerRadius" Value="100"/>
+			<Setter Property="BorderBrush" Value="White"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Margin" Value="-1"/>
+			<Setter Property="BoxShadow" Value="0 0.5 2 0 #22000000"/>
+		</Style>
+
+		<!-- ═══ ContextMenu: macOS-style rounded ═══ -->
+		<Style Selector="ContextMenu">
+			<Setter Property="Background" Value="#E8F0F0F0"/>
+			<Setter Property="BorderBrush" Value="#33000000"/>
+			<Setter Property="BorderThickness" Value="0.5"/>
+			<Setter Property="CornerRadius" Value="8"/>
+			<Setter Property="Padding" Value="1,4"/>
+			<Setter Property="FontFamily" Value="-apple-system, 'Helvetica Neue', sans-serif"/>
+			<Setter Property="FontSize" Value="13"/>
+		</Style>
+		<Style Selector="ContextMenu MenuItem">
+			<Setter Property="Padding" Value="12,4"/>
+			<Setter Property="Margin" Value="4,1"/>
+			<Setter Property="CornerRadius" Value="4"/>
+			<Setter Property="Foreground" Value="#1D1D1F"/>
+			<Setter Property="FontSize" Value="13"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="24"/>
+		</Style>
+		<Style Selector="ContextMenu MenuItem:pointerover /template/ Border#PART_LayoutRoot">
+			<Setter Property="Background" Value="#007AFF"/>
+			<Setter Property="CornerRadius" Value="4"/>
+		</Style>
+		<Style Selector="ContextMenu MenuItem:pointerover /template/ ContentPresenter#PART_HeaderPresenter">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style Selector="ContextMenu MenuItem:disabled /template/ ContentPresenter#PART_HeaderPresenter">
+			<Setter Property="Foreground" Value="#99999999"/>
+		</Style>
+		<Style Selector="ContextMenu Separator">
+			<Setter Property="Height" Value="1"/>
+			<Setter Property="Margin" Value="8,4"/>
+			<Setter Property="Background" Value="#22000000"/>
+		</Style>
+		<!-- Submenu popup container — same macOS look as parent menu -->
+		<Style Selector="MenuItem /template/ Popup > Border">
+			<Setter Property="Background" Value="#D9F6F6F6"/>
+			<Setter Property="BorderBrush" Value="#33000000"/>
+			<Setter Property="BorderThickness" Value="0.5"/>
+			<Setter Property="CornerRadius" Value="8"/>
+			<Setter Property="Padding" Value="1,4"/>
+		</Style>
+		<!-- Submenu items inherit same styling -->
+		<Style Selector="MenuItem MenuItem">
+			<Setter Property="Padding" Value="12,4"/>
+			<Setter Property="Margin" Value="4,1"/>
+			<Setter Property="CornerRadius" Value="4"/>
+			<Setter Property="Foreground" Value="#1D1D1F"/>
+			<Setter Property="FontSize" Value="13"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="24"/>
+		</Style>
+		<Style Selector="MenuItem MenuItem:pointerover /template/ Border#PART_LayoutRoot">
+			<Setter Property="Background" Value="#007AFF"/>
+			<Setter Property="CornerRadius" Value="4"/>
+		</Style>
+		<Style Selector="MenuItem MenuItem:pointerover /template/ ContentPresenter#PART_HeaderPresenter">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style Selector="MenuItem MenuItem:disabled /template/ ContentPresenter#PART_HeaderPresenter">
+			<Setter Property="Foreground" Value="#99999999"/>
+		</Style>
+		<Style Selector="MenuItem Separator">
+			<Setter Property="Height" Value="1"/>
+			<Setter Property="Margin" Value="8,4"/>
+			<Setter Property="Background" Value="#22000000"/>
+		</Style>
+
+		<!-- ═══ ScrollBar: macOS-style rounded thumb ═══ -->
+		<Style Selector="ScrollBar">
+			<Setter Property="AllowAutoHide" Value="True"/>
+		</Style>
+		<!-- Rounded thumb via template override -->
+		<Style Selector="ScrollBar Thumb">
+			<Setter Property="Background" Value="#88888888"/>
+			<Setter Property="Template">
+				<ControlTemplate TargetType="Thumb">
+					<Border Background="{TemplateBinding Background}"
+							CornerRadius="6"
+							Margin="2"/>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+		<Style Selector="ScrollBar Thumb:pointerover">
+			<Setter Property="Background" Value="#BB666666"/>
+		</Style>
+		<Style Selector="ScrollBar Thumb:pressed">
+			<Setter Property="Background" Value="#CC555555"/>
+		</Style>
+	</Application.Styles>
+
+</Application>

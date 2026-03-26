@@ -1,0 +1,21 @@
+<Window x:Class="MetaScope.Views.DialogTest"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	Title="DialogTest" Width="400" SizeToContent="Height" WindowStartupLocation="CenterOwner" CanResize="False">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="30"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<ComboBox x:Name="m_cbTest" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+			<ComboBoxItem>1</ComboBoxItem>
+			<ComboBoxItem>2</ComboBoxItem>
+		</ComboBox>
+	</Grid>
+</Window>
