@@ -23,9 +23,8 @@ MetaScope is a genome browser with integrative functions and a highly flexible, 
 - Interactive genomic map with pan, zoom, and feature selection
 - GFF / GZ / ZIP file support with automatic read-only mode for large files
 - Memory-optimized for datasets with millions of features
-- Workspace save/restore with auto-save and crash recovery
+- Workspace/GFF save/restore with auto-save and crash recovery
 - Export to PNG (300 dpi) and SVG
-- Docking panel layout with drag-to-reorder tabs
 - Single executable deployment (no external dependencies)
 
 ## Supported File Formats
