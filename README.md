@@ -15,16 +15,18 @@ MetaScope is a genome browser with integrative functions and a highly flexible, 
 
 | Platform | Version | Download |
 |----------|---------|----------|
-| Windows x64 | v1.1.11 | [MetaScope_v1.1.11_Windows_x64.zip](../../releases) |
-| macOS Apple Silicon | v1.2.0 | [MetaScope_v1.2.0_macOS_arm64.zip](../../releases) |
+| Windows x64 | v1.1.11 (recommended) | [MetaScope_v1.1.11_Windows_x64.zip](../../releases) |
+| Windows x64 | v1.2.1 | [MetaScope_v1.2.1_Windows_x64.zip](../../releases) |
+| macOS Apple Silicon | v1.2.1 | [MetaScope_v1.2.1_macOS_arm64.zip](../../releases) |
 
 ## Features
 
 - Interactive genomic map with pan, zoom, and feature selection
 - GFF / GZ / ZIP file support with automatic read-only mode for large files
 - Memory-optimized for datasets with millions of features
-- Workspace/GFF save/restore with auto-save and crash recovery
+- Workspace save/restore with auto-save and crash recovery
 - Export to PNG (300 dpi) and SVG
+- Docking panel layout with drag-to-reorder tabs
 - Single executable deployment (no external dependencies)
 
 ## Supported File Formats
@@ -84,9 +86,12 @@ MetaScope is a genome browser with integrative functions and a highly flexible, 
 
 ## Recent Changes
 
-### macOS
+### v1.2.1
+- Windows menu bar fix: menu now renders as an in-window menu bar on Windows
+- Platform-specific window chrome: macOS uses system title bar integration, Windows uses standard window frame
+- Keyboard shortcuts show Ctrl on Windows, Cmd on macOS
 
-**v1.2.0**
+### v1.2.0
 - macOS Apple Silicon native port using AvaloniaUI (cross-platform -- build for Windows with `dotnet publish -r win-x64`)
 - Drag-to-reorder document tabs with close button
 - macOS-native UI redesign
@@ -143,13 +148,14 @@ Open `src/windows/VugMap.sln` in Visual Studio 2022+ and build in Release config
 
 Output: `VugMap/bin/Release/MetaScope.exe`
 
-### macOS (.NET 8+, AvaloniaUI)
+### macOS / Windows (.NET 8+, AvaloniaUI)
 
 ```bash
 cd src/mac
 dotnet run --project MetaScope          # Run
 dotnet build -c Release                 # Build
-dotnet publish -c Release -r osx-arm64 --self-contained  # Publish
+dotnet publish -c Release -r osx-arm64 --self-contained  # Publish (macOS)
+dotnet publish -c Release -r win-x64 --self-contained    # Publish (Windows)
 ```
 
 ## License
