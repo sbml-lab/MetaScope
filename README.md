@@ -88,7 +88,7 @@ MetaScope is a genome browser with integrative functions and a highly flexible, 
 
 ### macOS / Windows
 
-**v v1.2.1**
+**v1.2.1**
 - Platform-specific window chrome: macOS uses system title bar integration, Windows uses standard window frame
 - Keyboard shortcuts show Ctrl on Windows, Cmd on macOS
 
