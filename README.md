@@ -86,16 +86,18 @@ MetaScope is a genome browser with integrative functions and a highly flexible, 
 
 ## Recent Changes
 
-### v1.2.1
+### macOS / Windows
+
+**v v1.2.1**
 - Platform-specific window chrome: macOS uses system title bar integration, Windows uses standard window frame
 - Keyboard shortcuts show Ctrl on Windows, Cmd on macOS
 
-### v1.2.0
+**v1.2.0**
 - macOS Apple Silicon native port using AvaloniaUI (cross-platform -- build for Windows with `dotnet publish -r win-x64`)
 - Drag-to-reorder document tabs with close button
 - macOS-native UI redesign
 
-### Windows
+### Windows (recommended)
 
 **v1.1.11**
 - Workspace: auto-creates a temporary workspace when opening GFF files, enabling auto-save and crash recovery
