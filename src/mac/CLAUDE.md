@@ -38,7 +38,7 @@ metascope-mac/                      ← workspace root
 cd outputs
 dotnet run --project MetaScope          # Run
 dotnet build -c Release                 # Build
-dotnet publish -c Release -r osx-arm64 --self-contained  # Publish macOS
+macos/publish-mac.sh [osx-arm64|osx-x64]   # Publish macOS: .app + zip in bin/Release/<rid>/ (icon/plist in macos/)
 ```
 
 ## Context Routing — Read BEFORE Working

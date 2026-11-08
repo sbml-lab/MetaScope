@@ -7,14 +7,12 @@
 	mc:Ignorable="d"
 	x:CompileBindings="False"
 	d:DesignWidth="1024" d:DesignHeight="768"
-	Title="MetaScope v1.2.0"
+	Title="MetaScope v1.2.2"
 	Width="1024" Height="768"
 	WindowState="Maximized"
 	Background="White"
-	FontFamily="-apple-system, 'Helvetica Neue', sans-serif"
-	DragDrop.AllowDrop="True"
-	ExtendClientAreaToDecorationsHint="True"
-	ExtendClientAreaChromeHints="PreferSystemChrome">
+	FontFamily="Helvetica Neue"
+	DragDrop.AllowDrop="True">
 
 	<Window.Styles>
 		<!-- ═══ Tab content stretch ═══ -->
@@ -42,7 +40,7 @@
 					<Border x:Name="PART_Root"
 							Background="Transparent"
 							CornerRadius="100"
-							Padding="26,8"
+							Padding="27,0,25,0"
 							Margin="1,0">
 						<ContentPresenter x:Name="PART_HeaderPresenter"
 										  Content="{TemplateBinding Header}"
@@ -135,6 +133,23 @@
 		<Style Selector="Button.float-btn:pointerover">
 			<Setter Property="Foreground" Value="#1D1D1F"/>
 		</Style>
+		<!-- ═══ Tool / bottom pane tabs: compact so the strip stays on one row ═══ -->
+		<Style Selector="TabControl#m_tabTools TabItem, TabControl#m_tabBottom TabItem">
+			<Setter Property="FontSize" Value="12"/>
+			<Setter Property="Padding" Value="8,6,8,0"/>
+			<Setter Property="MinHeight" Value="0"/>
+		</Style>
+		<Style Selector="TabControl#m_tabTools TabItem /template/ ContentPresenter#PART_ContentPresenter, TabControl#m_tabBottom TabItem /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Margin" Value="0,0,0,7"/>
+		</Style>
+		<!-- never wrap the strip: default ItemsPanel is a WrapPanel -->
+		<Style Selector="TabControl#m_tabTools, TabControl#m_tabBottom">
+			<Setter Property="ItemsPanel">
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</Setter>
+		</Style>
 	</Window.Styles>
 
 	<DockPanel x:Name="m_dpMain" LastChildFill="True">
@@ -143,8 +158,8 @@
 				<ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
 			</LayoutTransformControl.LayoutTransform>
 
-			<DockPanel LastChildFill="True" Margin="0,34,0,0">
-				<Menu DockPanel.Dock="Top" x:Name="m_mnuMain"/>
+			<DockPanel x:Name="m_dpInner" LastChildFill="True">
+				<NativeMenuBar DockPanel.Dock="Top"/>
 
 				<!-- STATUS BAR -->
 				<Border DockPanel.Dock="Bottom" BorderThickness="0,0.5,0,0" BorderBrush="#D5D5D5"
@@ -170,7 +185,7 @@
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="3*"/>
 						<ColumnDefinition Width="4"/>
-						<ColumnDefinition Width="300"/>
+						<ColumnDefinition Width="340" MinWidth="310"/>
 					</Grid.ColumnDefinitions>
 
 					<!-- DOCUMENT PANE -->
@@ -184,11 +199,12 @@
 							<ControlTemplate TargetType="TabControl">
 								<DockPanel>
 									<Border DockPanel.Dock="Top" Background="#DFDFE4"
-										Padding="1.5,1.5,1,1" Margin="6" CornerRadius="100">
-										<ItemsPresenter Name="PART_ItemsPresenter" Margin="0">
+										Padding="2,3,2,1" Margin="6" CornerRadius="100">
+										<!-- measured: the tab row lands ~1pt high with symmetric padding (BoxShadow/Margin -1 on the pill), so bias the padding -->
+										<ItemsPresenter Name="PART_ItemsPresenter" Margin="0" VerticalAlignment="Center">
 											<ItemsPresenter.ItemsPanel>
 												<ItemsPanelTemplate>
-													<StackPanel Orientation="Horizontal" Spacing="0" Margin="0"/>
+													<StackPanel Orientation="Horizontal" Spacing="0" Margin="0" VerticalAlignment="Center"/>
 												</ItemsPanelTemplate>
 											</ItemsPresenter.ItemsPanel>
 										</ItemsPresenter>
@@ -224,7 +240,7 @@
 							<TabControl x:Name="m_tabTools" TabStripPlacement="Top"
 								HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 								HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-								<TabItem Header="Workspace Explorer" x:Name="m_tabExplorer">
+								<TabItem Header="Explorer" ToolTip.Tip="Workspace Explorer" x:Name="m_tabExplorer">
 									<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
 										<TreeView x:Name="m_trvFile" DragDrop.AllowDrop="True" Background="Transparent" Margin="-8,0,0,0">
 											<TreeViewItem Header="File" x:Name="m_tviFile" IsExpanded="True"/>
@@ -239,7 +255,7 @@
 								<TabItem Header="Bookmark" x:Name="m_tabBookmark">
 									<ListBox x:Name="m_ltvBookmark" Background="Transparent"/>
 								</TabItem>
-								<TabItem Header="Feature Selected" x:Name="m_tabFeatureSelected">
+								<TabItem Header="Selected" ToolTip.Tip="Feature Selected" x:Name="m_tabFeatureSelected">
 									<ListBox x:Name="m_ltvFeatureSelected" Background="Transparent"/>
 								</TabItem>
 								<TabItem Header="Feature" x:Name="m_tabFeature">
@@ -250,12 +266,13 @@
 					</Border>
 
 					<!-- HORIZONTAL SPLITTER -->
-					<GridSplitter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+					<GridSplitter Grid.Row="1" Grid.Column="0"
 						ResizeDirection="Rows" ResizeBehavior="PreviousAndNext"
 						Height="4" HorizontalAlignment="Stretch"/>
 
 					<!-- BOTTOM PANE -->
-					<Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="0,0.5,0,0" BorderBrush="#D5D5D5">
+					<Border Grid.Row="2" Grid.Column="0" BorderThickness="0,0.5,0,0" BorderBrush="#D5D5D5">
+					  <Grid>
 						<TabControl x:Name="m_tabBottom" TabStripPlacement="Top">
 							<TabItem Header="Search" x:Name="m_tabSearch">
 								<ListBox x:Name="m_ltvSearch" Background="Transparent"/>
@@ -266,6 +283,9 @@
 									TextWrapping="Wrap" Margin="8" Background="Transparent"/>
 							</TabItem>
 						</TabControl>
+						<Button Classes="float-btn" Content="✕" HorizontalAlignment="Right" VerticalAlignment="Top"
+							Margin="0,4,8,0" ToolTip.Tip="Close" Click="OnBottomPaneCloseClick"/>
+					  </Grid>
 					</Border>
 				</Grid>
 			</DockPanel>

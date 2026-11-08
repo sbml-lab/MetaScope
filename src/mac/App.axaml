@@ -35,7 +35,7 @@
 		<!-- ═══ macOS Window defaults ═══ -->
 		<Style Selector="Window">
 			<Setter Property="Background" Value="#F6F6F6"/>
-			<Setter Property="FontFamily" Value="-apple-system, 'Helvetica Neue', sans-serif"/>
+			<Setter Property="FontFamily" Value="Helvetica Neue"/>
 			<Setter Property="FontSize" Value="13"/>
 		</Style>
 
@@ -70,6 +70,7 @@
 		<Style Selector="TextBox">
 			<Setter Property="CornerRadius" Value="6"/>
 			<Setter Property="FontSize" Value="13"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
 		</Style>
 
 		<!-- ═══ ComboBox: rounded ═══ -->
@@ -90,6 +91,39 @@
 		</Style>
 		<Style Selector="RadioButton">
 			<Setter Property="FontSize" Value="13"/>
+		</Style>
+
+		<!-- ═══ Dialog controls (Window Classes="dialog") ═══ -->
+		<Style Selector="Window.dialog TextBox, Window.dialog ComboBox">
+			<Setter Property="Padding" Value="6,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+			<Setter Property="Margin" Value="0,4"/>
+		</Style>
+		<Style Selector="Window.dialog Label">
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style Selector="Window.dialog RadioButton, Window.dialog CheckBox">
+			<Setter Property="Padding" Value="6,3"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Margin" Value="0,4"/>
+		</Style>
+		<Style Selector="Window.dialog Button">
+			<Setter Property="Padding" Value="8,4"/>
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="Height" Value="28"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Window.dialog RadioButton /template/ Ellipse">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
+		</Style>
+		<Style Selector="Window.dialog CheckBox /template/ Border#NormalRectangle">
+			<Setter Property="Width" Value="16"/>
+			<Setter Property="Height" Value="16"/>
 		</Style>
 
 		<!-- ═══ ListBox: rounded, horizontal scroll ═══ -->
@@ -117,7 +151,12 @@
 			<Setter Property="FontSize" Value="13"/>
 			<Setter Property="FontWeight" Value="SemiBold"/>
 			<Setter Property="Foreground" Value="#AEAEB2"/>
-			<Setter Property="Padding" Value="14,10"/>
+			<Setter Property="Padding" Value="14,10,14,0"/>
+		</Style>
+		<!-- Fluent puts PART_SelectedPipe inside the padded root, so bottom padding pushes the
+		     text down onto the pipe. Keep bottom Padding 0 and space the text with a presenter Margin. -->
+		<Style Selector="TabItem /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Margin" Value="0,0,0,8"/>
 		</Style>
 		<Style Selector="TabItem:selected">
 			<Setter Property="Foreground" Value="#1D1D1F"/>
@@ -198,7 +237,7 @@
 			<Setter Property="BorderThickness" Value="0.5"/>
 			<Setter Property="CornerRadius" Value="8"/>
 			<Setter Property="Padding" Value="1,4"/>
-			<Setter Property="FontFamily" Value="-apple-system, 'Helvetica Neue', sans-serif"/>
+			<Setter Property="FontFamily" Value="Helvetica Neue"/>
 			<Setter Property="FontSize" Value="13"/>
 		</Style>
 		<Style Selector="ContextMenu MenuItem">

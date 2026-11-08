@@ -1,47 +1,7 @@
-<Window x:Class="MetaScope.Views.DialogFeatureAddSize"
+<Window Classes="dialog" x:Class="MetaScope.Views.DialogFeatureAddSize"
         xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Size Feature" Width="400" SizeToContent="Height" WindowStartupLocation="CenterOwner" CanResize="False">
-	<Window.Styles>
-		<Style Selector="TextBox">
-			<Setter Property="Padding" Value="6,4"/>
-			<Setter Property="MinHeight" Value="0"/>
-			<Setter Property="Height" Value="28"/>
-		</Style>
-		<Style Selector="Label">
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-			<Setter Property="Padding" Value="0"/>
-		</Style>
-		<Style Selector="ComboBox">
-			<Setter Property="Padding" Value="6,4"/>
-			<Setter Property="MinHeight" Value="0"/>
-			<Setter Property="Height" Value="28"/>
-		</Style>
-		<Style Selector="RadioButton">
-			<Setter Property="Padding" Value="6,3"/>
-			<Setter Property="MinHeight" Value="0"/>
-		</Style>
-		<Style Selector="CheckBox">
-			<Setter Property="Padding" Value="6,3"/>
-			<Setter Property="MinHeight" Value="0"/>
-		</Style>
-		<Style Selector="Button">
-			<Setter Property="Padding" Value="8,4"/>
-			<Setter Property="MinHeight" Value="0"/>
-			<Setter Property="Height" Value="28"/>
-			<Setter Property="HorizontalContentAlignment" Value="Center"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-		</Style>
-		<Style Selector="RadioButton /template/ Ellipse">
-			<Setter Property="Width" Value="16"/>
-			<Setter Property="Height" Value="16"/>
-		</Style>
-		<Style Selector="CheckBox /template/ Border#NormalRectangle">
-			<Setter Property="Width" Value="16"/>
-			<Setter Property="Height" Value="16"/>
-		</Style>
-	</Window.Styles>
 	<Grid Margin="20">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" MinHeight="28"/>
@@ -59,7 +19,7 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="25"/>
+			<ColumnDefinition Width="Auto" MinWidth="25"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">* Fix position at</Label>
@@ -77,9 +37,9 @@
 			<TextBox Name="m_tbWidth" Width="50" Margin="4,0,0,0">400</TextBox>
 			<Label>bp</Label>
 		</StackPanel>
-		<StackPanel Name="m_spButton" Margin="0,2,0,0" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2">
-			<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Click="OnCancelClick" IsCancel="True">Cancel</Button>
-			<Button Name="m_btnOk" Classes="accent" HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Click="OnOkClick" IsDefault="True" Margin="5,0,5,0">OK</Button>
+		<StackPanel HorizontalAlignment="Right" Name="m_spButton" Margin="0,12,0,0" Orientation="Horizontal" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2">
+			<Button Name="m_btnCancel" Width="90" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+			<Button Name="m_btnOk" Classes="accent" Width="90" Margin="8,0,0,0" Click="OnOkClick" IsDefault="True">OK</Button>
 		</StackPanel>
 	</Grid>
 </Window>

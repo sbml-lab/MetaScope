@@ -1,47 +1,7 @@
-<Window x:Class="MetaScope.Views.DialogFeatureAdd"
+<Window Classes="dialog" x:Class="MetaScope.Views.DialogFeatureAdd"
         xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add a Feature" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" CanResize="False">
-	<Window.Styles>
-		<Style Selector="TextBox">
-			<Setter Property="Padding" Value="6,4"/>
-			<Setter Property="MinHeight" Value="0"/>
-			<Setter Property="Height" Value="28"/>
-		</Style>
-		<Style Selector="Label">
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-			<Setter Property="Padding" Value="0"/>
-		</Style>
-		<Style Selector="ComboBox">
-			<Setter Property="Padding" Value="6,4"/>
-			<Setter Property="MinHeight" Value="0"/>
-			<Setter Property="Height" Value="28"/>
-		</Style>
-		<Style Selector="RadioButton">
-			<Setter Property="Padding" Value="6,3"/>
-			<Setter Property="MinHeight" Value="0"/>
-		</Style>
-		<Style Selector="CheckBox">
-			<Setter Property="Padding" Value="6,3"/>
-			<Setter Property="MinHeight" Value="0"/>
-		</Style>
-		<Style Selector="Button">
-			<Setter Property="Padding" Value="8,4"/>
-			<Setter Property="MinHeight" Value="0"/>
-			<Setter Property="Height" Value="28"/>
-			<Setter Property="HorizontalContentAlignment" Value="Center"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-		</Style>
-		<Style Selector="RadioButton /template/ Ellipse">
-			<Setter Property="Width" Value="16"/>
-			<Setter Property="Height" Value="16"/>
-		</Style>
-		<Style Selector="CheckBox /template/ Border#NormalRectangle">
-			<Setter Property="Width" Value="16"/>
-			<Setter Property="Height" Value="16"/>
-		</Style>
-	</Window.Styles>
 	<Grid Margin="20">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" MinHeight="28"/>
@@ -55,9 +15,9 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="95"/>
-			<ColumnDefinition Width="15"/>
-			<ColumnDefinition Width="180"/>
+			<ColumnDefinition Width="Auto" MinWidth="95"/>
+			<ColumnDefinition Width="Auto" MinWidth="15"/>
+			<ColumnDefinition Width="Auto" MinWidth="180"/>
 			<ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 		<Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Source</Label>
@@ -82,9 +42,9 @@
 		<Label Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" Margin="0,6,0,0">Attribute</Label>
 		<Label Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="0,6,0,0">:</Label>
 		<TextBox Name="m_tbAttribute" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap"></TextBox>
-		<StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,4,0,0">
-			<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Click="OnCancelClick" IsCancel="True">Cancel</Button>
-			<Button Name="m_btnOk" Classes="accent" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Click="OnOkClick" IsDefault="True" Margin="5,0,5,0">OK</Button>
+		<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,12,0,0">
+			<Button Name="m_btnCancel" Width="90" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+			<Button Name="m_btnOk" Classes="accent" Width="90" Margin="8,0,0,0" Click="OnOkClick" IsDefault="True">OK</Button>
 		</StackPanel>
 	</Grid>
 </Window>

@@ -45,7 +45,7 @@ namespace MetaScope.Views
 
 			AddSection( "View", new string[,]
 			{
-				{ "⌘Tab / ⌘⇧Tab",			"Next / previous tab" },
+				{ "⌘⇧] / ⌘⇧[",			"Next / previous tab" },
 				{ "⌘T",					"Split view" },
 				{ "⌘F",					"Search" },
 				{ "F5",					"Refresh view" },
@@ -67,7 +67,7 @@ namespace MetaScope.Views
 			AddSection( "Feature Operations", new string[,]
 			{
 				{ "⌘U",					"Unite selected features" },
-				{ "⌘M",					"Merge features" },
+				{ "⌘⇧M",					"Merge features" },
 				{ "⌘V",					"Move features" },
 				{ "⌘C",					"Copy features" },
 				{ "⌘D",					"Delete features" },
@@ -115,6 +115,7 @@ namespace MetaScope.Views
 				tbKey.Text					= arrRows[ i, 0 ];
 				tbKey.FontFamily			= new FontFamily( "Menlo, 'SF Mono', Consolas, monospace" );
 				tbKey.FontSize				= 12;
+				tbKey.VerticalAlignment		= VerticalAlignment.Center;
 				bdrKey.Child				= tbKey;
 				grid.Children.Add( bdrKey );
 
@@ -127,6 +128,7 @@ namespace MetaScope.Views
 				TextBlock	tbDesc			= new TextBlock();
 				tbDesc.Text					= arrRows[ i, 1 ];
 				tbDesc.FontSize				= 12;
+				tbDesc.VerticalAlignment	= VerticalAlignment.Center;
 				bdrDesc.Child				= tbDesc;
 				grid.Children.Add( bdrDesc );
 			}

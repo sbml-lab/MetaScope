@@ -1,52 +1,10 @@
-<Window x:Class="MetaScope.Views.DialogLaneOperation"
+<Window Classes="dialog" x:Class="MetaScope.Views.DialogLaneOperation"
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
 	Title="Track Operation" Width="460" SizeToContent="Height" WindowStartupLocation="CenterOwner" CanResize="False">
-	<Window.Styles>
-		<Style Selector="TextBox">
-			<Setter Property="Padding" Value="6,4"/>
-			<Setter Property="MinHeight" Value="0"/>
-			<Setter Property="Height" Value="28"/>
-			<Setter Property="Margin" Value="0,2,0,2"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-		</Style>
-		<Style Selector="Label">
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-			<Setter Property="Padding" Value="0"/>
-		</Style>
-		<Style Selector="ComboBox">
-			<Setter Property="Padding" Value="6,4"/>
-			<Setter Property="MinHeight" Value="0"/>
-			<Setter Property="Height" Value="28"/>
-		</Style>
-		<Style Selector="RadioButton">
-			<Setter Property="Padding" Value="6,3"/>
-			<Setter Property="MinHeight" Value="0"/>
-		</Style>
-		<Style Selector="CheckBox">
-			<Setter Property="Padding" Value="6,3"/>
-			<Setter Property="MinHeight" Value="0"/>
-		</Style>
-		<Style Selector="Button">
-			<Setter Property="Padding" Value="8,4"/>
-			<Setter Property="MinHeight" Value="0"/>
-			<Setter Property="Height" Value="28"/>
-			<Setter Property="HorizontalContentAlignment" Value="Center"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-		</Style>
-		<Style Selector="RadioButton /template/ Ellipse">
-			<Setter Property="Width" Value="16"/>
-			<Setter Property="Height" Value="16"/>
-		</Style>
-		<Style Selector="CheckBox /template/ Border#NormalRectangle">
-			<Setter Property="Width" Value="16"/>
-			<Setter Property="Height" Value="16"/>
-		</Style>
-	</Window.Styles>
 	<Grid Margin="12,4,12,10">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
@@ -73,11 +31,11 @@
 						<RowDefinition Height="*"/>
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="20"/>
-						<ColumnDefinition Width="120"/>
-						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="Auto" MinWidth="20"/>
+						<ColumnDefinition Width="Auto" MinWidth="120"/>
+						<ColumnDefinition Width="Auto" MinWidth="15"/>
 						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="10"/>
+						<ColumnDefinition Width="Auto" MinWidth="10"/>
 					</Grid.ColumnDefinitions>
 					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to make average</Label>
 					<ListBox Name="m_lbAverageLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
@@ -99,7 +57,7 @@
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="70"/>
+							<ColumnDefinition Width="Auto" MinWidth="70"/>
 						</Grid.ColumnDefinitions>
 						<TextBox Name="m_tbAverageFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0"></TextBox>
 						<Button Name="m_btnAverageFileNew" Width="70" Grid.Row="0" Grid.Column="1" Click="OnAverageFileNewClick">Search</Button>
@@ -119,11 +77,11 @@
 						<RowDefinition Height="*"/>
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="20"/>
-						<ColumnDefinition Width="120"/>
-						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="Auto" MinWidth="20"/>
+						<ColumnDefinition Width="Auto" MinWidth="120"/>
+						<ColumnDefinition Width="Auto" MinWidth="15"/>
 						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="10"/>
+						<ColumnDefinition Width="Auto" MinWidth="10"/>
 					</Grid.ColumnDefinitions>
 					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to make difference</Label>
 					<ListBox Name="m_lbDiffLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
@@ -141,7 +99,7 @@
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="70"/>
+							<ColumnDefinition Width="Auto" MinWidth="70"/>
 						</Grid.ColumnDefinitions>
 						<TextBox Name="m_tbDiffFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0"></TextBox>
 						<Button Name="m_btnDiffFileNew" Width="70" Grid.Row="0" Grid.Column="1" Click="OnDiffFileNewClick">Search</Button>
@@ -162,11 +120,11 @@
 						<RowDefinition Height="*"/>
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="20"/>
-						<ColumnDefinition Width="120"/>
-						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="Auto" MinWidth="20"/>
+						<ColumnDefinition Width="Auto" MinWidth="120"/>
+						<ColumnDefinition Width="Auto" MinWidth="15"/>
 						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="10"/>
+						<ColumnDefinition Width="Auto" MinWidth="10"/>
 					</Grid.ColumnDefinitions>
 					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to make summation</Label>
 					<ListBox Name="m_lbSumLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
@@ -185,7 +143,7 @@
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="70"/>
+							<ColumnDefinition Width="Auto" MinWidth="70"/>
 						</Grid.ColumnDefinitions>
 						<TextBox Name="m_tbSumFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0"></TextBox>
 						<Button Name="m_btnSumFileNew" Width="70" Grid.Row="0" Grid.Column="1" Click="OnSumFileNewClick">Search</Button>
@@ -205,11 +163,11 @@
 						<RowDefinition Height="*"/>
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="20"/>
-						<ColumnDefinition Width="120"/>
-						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="Auto" MinWidth="20"/>
+						<ColumnDefinition Width="Auto" MinWidth="120"/>
+						<ColumnDefinition Width="Auto" MinWidth="15"/>
 						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="10"/>
+						<ColumnDefinition Width="Auto" MinWidth="10"/>
 					</Grid.ColumnDefinitions>
 					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to merge</Label>
 					<ListBox Name="m_lbMergeLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
@@ -228,7 +186,7 @@
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="70"/>
+							<ColumnDefinition Width="Auto" MinWidth="70"/>
 						</Grid.ColumnDefinitions>
 						<TextBox Name="m_tbMergeFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0"></TextBox>
 						<Button Name="m_btnMergeFileNew" Width="70" Grid.Row="0" Grid.Column="1" Click="OnMergeFileNewClick">Search</Button>
@@ -251,11 +209,11 @@
 						<RowDefinition Height="*"/>
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="20"/>
-						<ColumnDefinition Width="120"/>
-						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="Auto" MinWidth="20"/>
+						<ColumnDefinition Width="Auto" MinWidth="120"/>
+						<ColumnDefinition Width="Auto" MinWidth="15"/>
 						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="10"/>
+						<ColumnDefinition Width="Auto" MinWidth="10"/>
 					</Grid.ColumnDefinitions>
 					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to filter out</Label>
 					<ListBox Name="m_lbFilterLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
@@ -276,7 +234,7 @@
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="70"/>
+							<ColumnDefinition Width="Auto" MinWidth="70"/>
 						</Grid.ColumnDefinitions>
 						<TextBox Name="m_tbFilterFileNew" HorizontalAlignment="Stretch" IsEnabled="False" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0"></TextBox>
 						<Button Name="m_btnFilterFileNew" Width="70" Grid.Row="0" Grid.Column="1" Click="OnFilterFileNewClick">Search</Button>
@@ -296,11 +254,11 @@
 						<RowDefinition Height="*"/>
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="20"/>
-						<ColumnDefinition Width="120"/>
-						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="Auto" MinWidth="20"/>
+						<ColumnDefinition Width="Auto" MinWidth="120"/>
+						<ColumnDefinition Width="Auto" MinWidth="15"/>
 						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="10"/>
+						<ColumnDefinition Width="Auto" MinWidth="10"/>
 					</Grid.ColumnDefinitions>
 					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to adjust</Label>
 					<ListBox Name="m_lbAdjustLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
@@ -325,11 +283,11 @@
 						<RowDefinition Height="*"/>
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="20"/>
-						<ColumnDefinition Width="120"/>
-						<ColumnDefinition Width="15"/>
+						<ColumnDefinition Width="Auto" MinWidth="20"/>
+						<ColumnDefinition Width="Auto" MinWidth="120"/>
+						<ColumnDefinition Width="Auto" MinWidth="15"/>
 						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="10"/>
+						<ColumnDefinition Width="Auto" MinWidth="10"/>
 					</Grid.ColumnDefinitions>
 					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,4,0,0">* Tracks to assign ID</Label>
 					<ListBox Name="m_lbAssignIdLane" IsEnabled="False" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></ListBox>
@@ -340,9 +298,9 @@
 			</TabItem>
 		</TabControl>
 		<Grid Grid.Row="1" Grid.Column="0">
-			<StackPanel Name="m_spButton" Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-				<Button Name="m_btnCancel" HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Click="OnCancelClick" IsCancel="True">Cancel</Button>
-				<Button Name="m_btnOk" Classes="accent" HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Click="OnOkClick" IsDefault="True" Margin="5,0,5,0">OK</Button>
+			<StackPanel HorizontalAlignment="Right" Name="m_spButton" Margin="0,12,0,0" Orientation="Horizontal">
+				<Button Name="m_btnCancel" Width="90" Click="OnCancelClick" IsCancel="True">Cancel</Button>
+				<Button Name="m_btnOk" Classes="accent" Width="90" Margin="8,0,0,0" Click="OnOkClick" IsDefault="True">OK</Button>
 			</StackPanel>
 			<Grid Name="m_grdProgress" IsVisible="False">
 				<ProgressBar x:Name="m_pgbProgress" Height="25" HorizontalAlignment="Stretch" Minimum="0" Maximum="100"></ProgressBar>

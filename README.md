@@ -17,7 +17,8 @@ MetaScope is a genome browser with integrative functions and a highly flexible, 
 |----------|---------|----------|
 | Windows x64 | v1.1.11 (recommended) | [MetaScope_v1.1.11_Windows_x64.zip](../../releases) |
 | Windows x64 | v1.2.1 | [MetaScope_v1.2.1_Windows_x64.zip](../../releases) |
-| macOS Apple Silicon | v1.2.1 | [MetaScope_v1.2.1_macOS_arm64.zip](../../releases) |
+| macOS Apple Silicon | v1.2.2 | [MetaScope_v1.2.2_macOS_arm64.zip](../../releases) |
+| macOS Intel | v1.2.2 | [MetaScope_v1.2.2_macOS_x64.zip](../../releases) |
 
 ## Features
 
@@ -88,6 +89,12 @@ MetaScope is a genome browser with integrative functions and a highly flexible, 
 
 ### macOS / Windows
 
+**v1.2.2** (macOS)
+- Distributed as a proper `MetaScope.app` bundle (Apple Silicon and Intel) with a full-size Dock icon
+- Dialogs restyled: consistent button row, row spacing, and vertically centered text
+- Search results pane: close button, confined to the document column
+- Document tab text and Inspector tab underline alignment fixes
+
 **v1.2.1**
 - Platform-specific window chrome: macOS uses system title bar integration, Windows uses standard window frame
 - Keyboard shortcuts show Ctrl on Windows, Cmd on macOS
@@ -157,6 +164,7 @@ dotnet run --project MetaScope          # Run
 dotnet build -c Release                 # Build
 dotnet publish -c Release -r osx-arm64 --self-contained  # Publish (macOS)
 dotnet publish -c Release -r win-x64 --self-contained    # Publish (Windows)
+macos/publish-mac.sh [osx-arm64|osx-x64]                 # macOS .app + zip (icon/plist in macos/)
 ```
 
 ## License

@@ -1347,11 +1347,12 @@ namespace MetaScope.Controls
 		/// </summary>
 		private void DoTypeFillRender( DrawingContext dc )
 		{
-			double		dOffX			= PnlMap.N_RULER_LEFT - PnlMap.N_LANE_VERTICALGAP;
-			double		dOffY			= Height - N_SCOREVERTICAL_GAP + 2.0f;
+			// +4 / +6: the WPF Label carried 5px of padding; without it the first label butts into the "min" axis label
+			double		dOffX			= PnlMap.N_RULER_LEFT - PnlMap.N_LANE_VERTICALGAP + 4.0f;
+			double		dOffY			= Height - N_SCOREVERTICAL_GAP + 6.0f;
 
 			if( double.IsNaN( dOffY ) || double.IsInfinity( dOffY ) )
-				dOffY = Bounds.Height - N_SCOREVERTICAL_GAP + 2.0f;
+				dOffY = Bounds.Height - N_SCOREVERTICAL_GAP + 6.0f;
 
 			double		dCurrX			= dOffX;
 

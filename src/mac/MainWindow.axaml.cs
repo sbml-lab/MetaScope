@@ -158,6 +158,14 @@ public partial class MainWindow : Window
 	{
 		InitializeComponent();
 
+		// macOS: extend into title bar, use system chrome, offset content below title bar
+		if( OperatingSystem.IsMacOS() )
+		{
+			ExtendClientAreaToDecorationsHint = true;
+			ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.PreferSystemChrome;
+			m_dpInner.Margin = new Thickness( 0, 34, 0, 0 );
+		}
+
 		s_lstWindows.Add( this );
 		DataContext			= this;
 
@@ -171,6 +179,16 @@ public partial class MainWindow : Window
 		Closing				+= OnClosing;
 
 		AddHandler( DragDrop.DropEvent, OnDrop );
+		AddHandler( KeyDownEvent, OnPreviewKeyDown, RoutingStrategies.Tunnel );	// Ctrl+Tab: focus traversal eats Tab before KeyBindings run
+	}
+
+	private void OnPreviewKeyDown( object sender, KeyEventArgs ea )
+	{
+		if( ea.Key != Key.Tab || !ea.KeyModifiers.HasFlag( KeyModifiers.Control ) )	return;
+
+		if( ea.KeyModifiers.HasFlag( KeyModifiers.Shift ) )	OnCommandViewTabPrev();
+		else												OnCommandViewTabNext();
+		ea.Handled	= true;
 	}
 
 	// ================================================================
@@ -354,6 +372,9 @@ public partial class MainWindow : Window
 
 	private void DoMenuInitialize()
 	{
+		// macOS shows Cmd (⌘) in menu gestures; Windows/Linux shows Ctrl
+		string mod = OperatingSystem.IsMacOS() ? "Cmd" : "Ctrl";
+
 		NativeMenuItem NMI( string header, ICommand cmd = null, string gesture = null )
 		{
 			var nmi = new NativeMenuItem( header );
@@ -372,16 +393,16 @@ public partial class MainWindow : Window
 		// File
 		var nmiFile = new NativeMenuItem( "File" ) { Menu = new NativeMenu() };
 		m_nmnFile = nmiFile.Menu;
-		m_nmnFile.Add( NMI( "Open", CmdFileOpen, "Cmd+O" ) );
-		m_nmnFile.Add( NMI( "Open Workspace", CmdFileOpenWorkspace, "Cmd+Shift+O" ) );
+		m_nmnFile.Add( NMI( "Open", CmdFileOpen, $"{mod}+O" ) );
+		m_nmnFile.Add( NMI( "Open Workspace", CmdFileOpenWorkspace, $"{mod}+Shift+O" ) );
 		m_nmnFile.Add( NMI( "Open Layout", CmdFileOpenLayout ) );
 		m_nMruInsertIndex = m_nmnFile.Items.Count;
 		m_nmnFile.Add( new NativeMenuItemSeparator() );
-		m_nmnFile.Add( NMI( "Save Workspace", CmdFileSaveWorkspace, "Cmd+Shift+S" ) );
+		m_nmnFile.Add( NMI( "Save Workspace", CmdFileSaveWorkspace, $"{mod}+Shift+S" ) );
 		m_nmnFile.Add( NMI( "Save Workspace As", CmdFileSaveWorkspaceAs ) );
 		m_nmnFile.Add( NMI( "Save Layout As", CmdFileSaveLayoutAs ) );
-		m_nmnFile.Add( NMI( "Save All Data", CmdFileSaveAll, "Cmd+S" ) );
-		m_nmnFile.Add( NMI( "Export Image...", CmdFileExportImage, "Cmd+Shift+E" ) );
+		m_nmnFile.Add( NMI( "Save All Data", CmdFileSaveAll, $"{mod}+S" ) );
+		m_nmnFile.Add( NMI( "Export Image...", CmdFileExportImage, $"{mod}+Shift+E" ) );
 		m_nmnFile.Add( new NativeMenuItemSeparator() );
 		m_nmnFile.Add( NMI( "Close All", CmdFileCloseAll ) );
 		m_nmnFile.Add( NMI( "Exit", CmdFileExit ) );
@@ -389,15 +410,15 @@ public partial class MainWindow : Window
 
 		// Data
 		var nmiData = new NativeMenuItem( "Data" ) { Menu = new NativeMenu() };
-		nmiData.Menu.Add( NMI( "Search", CmdDataSearch, "Cmd+F" ) );
+		nmiData.Menu.Add( NMI( "Search", CmdDataSearch, $"{mod}+F" ) );
 		nmiData.Menu.Add( new NativeMenuItemSeparator() );
 		var nmiFeature = new NativeMenuItem( "Feature" ) { Menu = new NativeMenu() };
-		nmiFeature.Menu.Add( NMI( "Unite", CmdDataFeatureUnite, "Cmd+U" ) );
-		nmiFeature.Menu.Add( NMI( "Merge", CmdDataFeatureMerge, "Cmd+M" ) );
+		nmiFeature.Menu.Add( NMI( "Unite", CmdDataFeatureUnite, $"{mod}+U" ) );
+		nmiFeature.Menu.Add( NMI( "Merge", CmdDataFeatureMerge, OperatingSystem.IsMacOS() ? "Cmd+Shift+M" : "Ctrl+M" ) );	// Cmd+M is macOS Minimize
 		nmiFeature.Menu.Add( NMI( "Move", CmdDataFeatureMove ) );
 		nmiFeature.Menu.Add( NMI( "Copy", CmdDataFeatureCopy ) );
-		nmiFeature.Menu.Add( NMI( "Delete", CmdDataFeatureDelete, "Cmd+D" ) );
-		nmiFeature.Menu.Add( NMI( "Undo", CmdDataFeatureUndo, "Cmd+Z" ) );
+		nmiFeature.Menu.Add( NMI( "Delete", CmdDataFeatureDelete, $"{mod}+D" ) );
+		nmiFeature.Menu.Add( NMI( "Undo", CmdDataFeatureUndo, $"{mod}+Z" ) );
 		nmiFeature.Menu.Add( new NativeMenuItemSeparator() );
 		m_mniSelectByPosition = NMI( "Select by only position", CmdDataSelectByPosition );
 		m_mniSelectByPosition.ToggleType = NativeMenuItemToggleType.CheckBox;
@@ -440,13 +461,13 @@ public partial class MainWindow : Window
 
 		// View
 		var nmiView = new NativeMenuItem( "View" ) { Menu = new NativeMenu() };
-		nmiView.Menu.Add( NMI( "Zoom In", CmdViewZoomIn, "Cmd+OemPlus" ) );
-		nmiView.Menu.Add( NMI( "Zoom Out", CmdViewZoomOut, "Cmd+OemMinus" ) );
+		nmiView.Menu.Add( NMI( "Zoom In", CmdViewZoomIn, $"{mod}+OemPlus" ) );
+		nmiView.Menu.Add( NMI( "Zoom Out", CmdViewZoomOut, $"{mod}+OemMinus" ) );
 		nmiView.Menu.Add( NMI( "Zoom To", CmdViewZoomTo ) );
 		nmiView.Menu.Add( NMI( "Scroll Left", CmdViewScrollLeft ) );
 		nmiView.Menu.Add( NMI( "Scroll Right", CmdViewScrollRight ) );
-		nmiView.Menu.Add( NMI( "Position To", CmdViewPositionTo, "Cmd+G" ) );
-		nmiView.Menu.Add( NMI( "Split", CmdViewSplit, "Cmd+T" ) );
+		nmiView.Menu.Add( NMI( "Position To", CmdViewPositionTo, $"{mod}+G" ) );
+		nmiView.Menu.Add( NMI( "Split", CmdViewSplit, $"{mod}+T" ) );
 		nmiView.Menu.Add( NMI( "Feature Opacity", CmdViewFeatureOpacity ) );
 		nmiView.Menu.Add( new NativeMenuItemSeparator() );
 		nmiView.Menu.Add( NMI( "Scale Up", CmdViewScaleUp ) );
@@ -483,7 +504,6 @@ public partial class MainWindow : Window
 		menu.NeedsUpdate += ( s, e ) => DoMenuCanExecuteUpdate();
 
 		NativeMenu.SetMenu( this, menu );
-		m_mnuMain.IsVisible = false;
 	}
 
 	private void DoKeyBindingsInitialize()
@@ -491,6 +511,7 @@ public partial class MainWindow : Window
 		// macOS: use ⌘ (Meta) instead of Ctrl
 		KeyModifiers Cmd = OperatingSystem.IsMacOS() ? KeyModifiers.Meta : KeyModifiers.Control;
 		KeyModifiers CmdShift = Cmd | KeyModifiers.Shift;
+		bool bMac = OperatingSystem.IsMacOS();
 
 		void Bind( KeyGesture g, ICommand cmd )
 		{
@@ -509,7 +530,7 @@ public partial class MainWindow : Window
 		// Data — Feature
 		Bind( new KeyGesture( Key.F, Cmd ),					CmdDataSearch );
 		Bind( new KeyGesture( Key.U, Cmd ),					CmdDataFeatureUnite );
-		Bind( new KeyGesture( Key.M, Cmd ),					CmdDataFeatureMerge );
+		Bind( new KeyGesture( Key.M, bMac ? CmdShift : Cmd ),	CmdDataFeatureMerge );		// Cmd+M is macOS Minimize
 		Bind( new KeyGesture( Key.V, Cmd ),					CmdDataFeatureMove );
 		Bind( new KeyGesture( Key.C, Cmd ),					CmdDataFeatureCopy );
 		Bind( new KeyGesture( Key.D, Cmd ),					CmdDataFeatureDelete );
@@ -542,8 +563,13 @@ public partial class MainWindow : Window
 		Bind( new KeyGesture( Key.Right, KeyModifiers.None ),	CmdViewScrollRightSmall );
 		Bind( new KeyGesture( Key.Home, KeyModifiers.None ),	CmdViewGoHome );
 		Bind( new KeyGesture( Key.End, KeyModifiers.None ),	CmdViewGoEnd );
-		Bind( new KeyGesture( Key.Tab, Cmd ),					CmdViewTabNext );
-		Bind( new KeyGesture( Key.Tab, CmdShift ),				CmdViewTabPrev );
+		// Tab switching: Ctrl+Tab / Ctrl+Shift+Tab live in OnPreviewKeyDown (Windows/Linux).  On macOS Avalonia.Native
+		// swallows Ctrl+Tab before managed code sees it, and Cmd+Tab is the app switcher, so macOS uses Cmd+Shift+] / [.
+		if( bMac )
+		{
+			Bind( new KeyGesture( Key.OemCloseBrackets, CmdShift ),	CmdViewTabNext );
+			Bind( new KeyGesture( Key.OemOpenBrackets, CmdShift ),	CmdViewTabPrev );
+		}
 		Bind( new KeyGesture( Key.F5, KeyModifiers.None ),		CmdViewRefresh );
 		Bind( new KeyGesture( Key.OemPlus, CmdShift ),			CmdViewScaleUp );
 		Bind( new KeyGesture( Key.OemMinus, CmdShift ),		CmdViewScaleDown );
@@ -553,9 +579,13 @@ public partial class MainWindow : Window
 		Bind( new KeyGesture( Key.Right, KeyModifiers.Alt ),		CmdFeatureMoveRight );
 		Bind( new KeyGesture( Key.Down, KeyModifiers.Alt ),			CmdFeatureShrinkStart );
 		Bind( new KeyGesture( Key.Up, KeyModifiers.Alt ),			CmdFeatureExpandEnd );
+		Bind( new KeyGesture( Key.NumPad1 ),						CmdFeatureMoveLeft );		// WPF v1.1.11 NumPad bindings
+		Bind( new KeyGesture( Key.NumPad2 ),						CmdFeatureMoveRight );
+		Bind( new KeyGesture( Key.NumPad4 ),						CmdFeatureShrinkStart );
+		Bind( new KeyGesture( Key.NumPad5 ),						CmdFeatureExpandEnd );
 
 		// Help
-		Bind( new KeyGesture( Key.H, Cmd ),					CmdHelpDocumentation );
+		Bind( bMac ? new KeyGesture( Key.OemQuestion, CmdShift ) : new KeyGesture( Key.H, Cmd ),	CmdHelpDocumentation );	// Cmd+H is macOS Hide; Cmd+? is the macOS Help convention
 	}
 
 	// ================================================================
@@ -2013,6 +2043,11 @@ public partial class MainWindow : Window
 		m_grdContent.RowDefinitions[2].Height = new GridLength( 0 );
 	}
 
+	public void OnBottomPaneCloseClick( object sender, RoutedEventArgs ea )
+	{
+		DoBottomPaneHide();
+	}
+
 	// ================================================================
 	// Help commands
 	// ================================================================
@@ -2428,7 +2463,7 @@ public partial class MainWindow : Window
 		body.Children.Add( IntroSeparator() );
 		body.Children.Add( new TextBlock
 		{
-			Text = $"Version {Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "2.0.0"}",
+			Text = $"Version {Assembly.GetExecutingAssembly().GetName().Version?.ToString( 3 ) ?? "1.2.2"}",
 			FontSize = 13,
 			FontWeight = FontWeight.SemiBold,
 			Foreground = new Avalonia.Media.SolidColorBrush( Avalonia.Media.Color.FromRgb( 60, 60, 60 ) )
@@ -2438,24 +2473,33 @@ public partial class MainWindow : Window
 		body.Children.Add( IntroSeparator() );
 		body.Children.Add( IntroHeader( "Recent Changes" ) );
 
-		// macOS
+		// macOS / Windows
 		body.Children.Add( new TextBlock
 		{
-			Text = "\uF8FF  macOS",
+			Text = "\uF8FF  macOS / \u229E  Windows",
 			FontSize = 13,
 			FontWeight = FontWeight.Bold,
 			Margin = new Thickness( 0, 10, 0, 2 ),
 			Foreground = new Avalonia.Media.SolidColorBrush( Avalonia.Media.Color.FromRgb( 40, 40, 40 ) )
 		} );
+		body.Children.Add( IntroVersion( "v1.2.2" ) );
+		body.Children.Add( IntroBullet( "macOS app bundle (MetaScope.app) with full-size Dock icon, ad-hoc signed" ) );
+		body.Children.Add( IntroBullet( "Dialog restyle: button row, row spacing, vertically centered text (Helvetica Neue)" ) );
+		body.Children.Add( IntroBullet( "Search results pane: close button, confined to the document column" ) );
+		body.Children.Add( IntroBullet( "Document tab text and Inspector tab underline alignment fixes" ) );
+		body.Children.Add( IntroVersion( "v1.2.1" ) );
+		body.Children.Add( IntroBullet( "Windows menu bar fix: menu now renders as an in-window menu bar on Windows" ) );
+		body.Children.Add( IntroBullet( "Platform-specific window chrome (macOS system title bar / Windows standard frame)" ) );
+		body.Children.Add( IntroBullet( "Keyboard shortcuts show Ctrl on Windows, Cmd on macOS" ) );
 		body.Children.Add( IntroVersion( "v1.2.0" ) );
 		body.Children.Add( IntroBullet( "macOS Apple Silicon native port using AvaloniaUI" ) );
 		body.Children.Add( IntroBullet( "Drag-to-reorder document tabs with close button" ) );
 		body.Children.Add( IntroBullet( "macOS-native UI redesign" ) );
 
-		// Windows
+		// Windows (legacy)
 		body.Children.Add( new TextBlock
 		{
-			Text = "\u229E  Windows",
+			Text = "\u229E  Windows (recommended)",
 			FontSize = 13,
 			FontWeight = FontWeight.Bold,
 			Margin = new Thickness( 0, 14, 0, 2 ),
@@ -2846,8 +2890,8 @@ public partial class MainWindow : Window
 			m_bdrTools.Child = floatContent as DockPanel;
 			m_bdrTools.IsVisible = true;
 			m_grdContent.ColumnDefinitions[1].Width = new GridLength( 1 );
-			m_grdContent.ColumnDefinitions[2].MinWidth = 150;
-			m_grdContent.ColumnDefinitions[2].Width = new GridLength( 280 );
+			m_grdContent.ColumnDefinitions[2].MinWidth = 310;	// keep in sync with MainWindow.axaml column (tab strip must not wrap)
+			m_grdContent.ColumnDefinitions[2].Width = new GridLength( 340 );
 
 			foreach( var child in m_grdContent.Children.OfType<GridSplitter>().Where( g => Grid.GetColumn( g ) == 1 ) )
 				child.IsVisible = true;
@@ -2986,7 +3030,7 @@ public partial class MainWindow : Window
 			for( int i = 0; i < lstWorkspace.Count; i++ )
 			{
 				string strPath = lstWorkspace[i];
-				string strName = Path.GetFileName( strPath );
+				string strName = Path.GetFileName( strPath ).Replace( "_", "__" );	// '_' is a mnemonic marker in menu headers
 				var nmi = new NativeMenuItem( $"{i + 1}  {strName}" );
 				string capturedPath = strPath;
 				nmi.Click += ( s, e ) => DoDrop( new[] { capturedPath } );
@@ -3005,7 +3049,7 @@ public partial class MainWindow : Window
 			for( int i = 0; i < lstGff.Count; i++ )
 			{
 				string strPath = lstGff[i];
-				string strName = Path.GetFileName( strPath );
+				string strName = Path.GetFileName( strPath ).Replace( "_", "__" );	// '_' is a mnemonic marker in menu headers
 				var nmi = new NativeMenuItem( $"{i + 1}  {strName}" );
 				string capturedPath = strPath;
 				nmi.Click += ( s, e ) => DoDrop( new[] { capturedPath } );

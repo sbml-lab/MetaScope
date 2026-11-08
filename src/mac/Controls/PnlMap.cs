@@ -1484,7 +1484,9 @@ namespace MetaScope.Controls
 		{
 			var				props			= ea.KeyModifiers;
 
-			if( props.HasFlag( KeyModifiers.Meta ) )
+			KeyModifiers	kmZoom			= OperatingSystem.IsMacOS() ? KeyModifiers.Meta : KeyModifiers.Control;	// Cmd+scroll on macOS, Ctrl+scroll elsewhere
+
+			if( props.HasFlag( kmZoom ) )
 			{
 				var doc = m_docMap as MetaScope.Views.DocMap;
 				if( doc != null )

@@ -93,7 +93,7 @@ namespace MetaScope.Controls
 				Point			ptNotch1Start	= new Point( PnlMap.N_RULER_LEFT + dWidthRuler, PnlMap.N_RULER_TOP );
 				Point			ptNotch1End		= new Point( PnlMap.N_RULER_LEFT + dWidthRuler, PnlMap.N_RULER_TOP - PnlMap.N_RULER_NOTCHHEIGHT );
 				RenderRulerDrawLine( dc, m_penRuler, ptNotch1Start, ptNotch1End );
-				RenderRulerText( dc, ptNotch1End, nPosDispMax );
+				double			dShiftEnd		= RenderRulerText( dc, ptNotch1End, nPosDispMax );
 
 				int				nNotchCount		= UtilityMath.DoRound( dWidthPosition / nRulerUnit ) + 1;
 				int				nNotchStart		= ( pnlMap.Position / nRulerUnit + 1 ) * nRulerUnit;
@@ -109,7 +109,7 @@ namespace MetaScope.Controls
 					{
 						continue;
 					}
-					else if( PnlMap.N_RULER_LEFT + dWidthRuler - dOffset < 15.0f )
+					else if( PnlMap.N_RULER_LEFT + dWidthRuler - dOffset < 15.0f + dShiftEnd )
 					{
 						continue;
 					}
@@ -120,7 +120,8 @@ namespace MetaScope.Controls
 			}
 		}
 
-		private void RenderRulerText( DrawingContext dc, Point ptOrigin, int nText )
+		/// <returns>How far the label was shifted left to stay inside the control (0 when it fit).</returns>
+		private double RenderRulerText( DrawingContext dc, Point ptOrigin, int nText )
 		{
 			string			strText			= string.Format( "{0:N0}", nText );
 
@@ -134,11 +135,18 @@ namespace MetaScope.Controls
 			double			dTransX			= ptOrigin.X - PnlMap.N_RULERTEXT_WIDTH;
 			double			dTransY			= ptOrigin.Y - PnlMap.N_RULERTEXT_HEIGHT;
 
+			// The last label runs up-right past the clip rect and loses its trailing digits; pull it back inside.
+			double			dCos			= Math.Abs( Math.Cos( m_dRulerTextRotation * Math.PI / 180.0 ) );
+			double			dOverflow		= Math.Max( 0.0, dTransX + ( ftNotch.Width + ftNotch.Height ) * dCos - Bounds.Width );
+			dTransX							-= dOverflow;
+
 			using( dc.PushTransform( Matrix.CreateTranslation( dTransX, dTransY ) ) )
 			using( dc.PushTransform( Matrix.CreateRotation( m_dRulerTextRotation * Math.PI / 180.0 ) ) )
 			{
 				dc.DrawText( ftNotch, m_ptRulerTextOrigin );
 			}
+
+			return dOverflow;
 		}
 
 		private		static int[]	S_NUNITA		= { 1, 10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000 };
