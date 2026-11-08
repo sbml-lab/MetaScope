@@ -16,7 +16,7 @@ MetaScope is a genome browser with integrative functions and a highly flexible, 
 | Platform | Version | Download |
 |----------|---------|----------|
 | Windows x64 | v1.1.11 (recommended) | [MetaScope_v1.1.11_Windows_x64.zip](../../releases) |
-| Windows x64 | v1.2.1 | [MetaScope_v1.2.1_Windows_x64.zip](../../releases) |
+| Windows x64 | v1.2.2 | [MetaScope_v1.2.2_Windows_x64.zip](../../releases) |
 | macOS Apple Silicon | v1.2.2 | [MetaScope_v1.2.2_macOS_arm64.zip](../../releases) |
 | macOS Intel | v1.2.2 | [MetaScope_v1.2.2_macOS_x64.zip](../../releases) |
 
@@ -89,8 +89,10 @@ MetaScope is a genome browser with integrative functions and a highly flexible, 
 
 ### macOS / Windows
 
-**v1.2.2** (macOS)
-- Distributed as a proper `MetaScope.app` bundle (Apple Silicon and Intel) with a full-size Dock icon
+**v1.2.2**
+- Builds for Windows x64, macOS Apple Silicon and macOS Intel from the same source
+- macOS distributed as a proper `MetaScope.app` bundle with a full-size Dock icon
+- Floating Inspector: the document pane fills the vacated column and the panel keeps its styling
 - Dialogs restyled: consistent button row, row spacing, and vertically centered text
 - Search results pane: close button, confined to the document column
 - Document tab text and Inspector tab underline alignment fixes

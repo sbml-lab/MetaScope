@@ -2487,6 +2487,7 @@ public partial class MainWindow : Window
 		body.Children.Add( IntroBullet( "Dialog restyle: button row, row spacing, vertically centered text (Helvetica Neue)" ) );
 		body.Children.Add( IntroBullet( "Search results pane: close button, confined to the document column" ) );
 		body.Children.Add( IntroBullet( "Document tab text and Inspector tab underline alignment fixes" ) );
+		body.Children.Add( IntroBullet( "Floating Inspector: document pane fills the vacated column, panel keeps its styling" ) );
 		body.Children.Add( IntroVersion( "v1.2.1" ) );
 		body.Children.Add( IntroBullet( "Windows menu bar fix: menu now renders as an in-window menu bar on Windows" ) );
 		body.Children.Add( IntroBullet( "Platform-specific window chrome (macOS system title bar / Windows standard frame)" ) );
@@ -2863,6 +2864,7 @@ public partial class MainWindow : Window
 		foreach( var child in m_grdContent.Children.OfType<GridSplitter>().Where( g => Grid.GetColumn( g ) == 1 ).ToList() )
 			child.IsVisible = false;
 		m_grdContent.ColumnDefinitions[1].Width = new GridLength( 0 );
+		m_grdContent.ColumnDefinitions[2].MinWidth = 0;	// Width=0 alone is clamped by the XAML MinWidth (310) → empty column stays
 		m_grdContent.ColumnDefinitions[2].Width = new GridLength( 0 );
 		m_grdContent.ColumnDefinitions[0].Width = new GridLength( 1, GridUnitType.Star );
 
@@ -2873,13 +2875,16 @@ public partial class MainWindow : Window
 		m_wndFloatingTools = new Window
 		{
 			Title		= "Inspector",
-			Width		= 320,
+			Width		= 340,	// same as the docked column
 			Height		= 550,
 			Content		= content,
 			Background	= new Avalonia.Media.SolidColorBrush( Avalonia.Media.Color.Parse( "#F2F2F7" ) ),
 			FontFamily	= new Avalonia.Media.FontFamily( "-apple-system, 'Helvetica Neue', sans-serif" ),
 			WindowStartupLocation = WindowStartupLocation.CenterScreen
 		};
+
+		// Window.Styles stay with MainWindow; without this the tab strip falls back to Fluent defaults (and wraps)
+		m_wndFloatingTools.Styles.Add( new Avalonia.Markup.Xaml.Styling.StyleInclude( new Uri( "avares://MetaScope/" ) ) { Source = new Uri( "avares://MetaScope/Styles/MainWindow.axaml" ) } );
 
 		m_wndFloatingTools.Closed += ( s, e ) =>
 		{
